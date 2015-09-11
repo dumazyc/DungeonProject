@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import dungeon.Dungeon;
+import dungeon.Room;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -13,7 +14,12 @@ public class DungeonTest {
 
 	@Before
 	public void createDungeon() {
-		dungeon = new Dungeon();
+		Room exit = new Room("exit", true);
+		Room trap = new Room("trap", true);
+		Room intersec = new Room("intersection", false, exit, null, trap, null);
+		Room entrance = new Room("entrance", false, intersec, null, null, null);
+		
+		dungeon = new Dungeon(entrance);
 	}
 
 	@Test

@@ -10,38 +10,50 @@ public class Dungeon {
 	protected final Scanner scanner = new Scanner(System.in);
 	protected List<Room> roomList;
 
-	public Dungeon() {
+	public Dungeon(Room entrance) {
+		this.currentRoom = entrance;
 		this.roomList = new ArrayList<Room>();
 		createDungeon();
 	}
 
 	private void createDungeon() {
-		
+
 	}
 
 	public Room getCurrentRoom() {
 		return currentRoom;
 	}
+	
+	public String getCurrentRoomName() {
+		return currentRoom.getName();
+	}
 
 	public void interpretCommand(String command) {
 		switch (command) {
 		case "go north":
-			
+			currentRoom = currentRoom.goToNorthRoom();
+			break;
 		case "go west":
-			
+			currentRoom = currentRoom.goToWestRoom();
+			break;
 		default:
-			System.out.println("I don’t know what you mean");
+			System.out.println("I don't know what you mean");
 		}
 	}
 
 	public static void main(String[] args) {
-		Dungeon dungeon = new Dungeon();
+		Room exit = new Room("exit", true);
+		Room trap = new Room("trap", true);
+		Room intersec = new Room("intersection", false, exit, null, trap, null);
+		Room entrance = new Room("entrance", false, intersec, null, null, null);
+		
+		Dungeon dungeon = new Dungeon(entrance);
 		dungeon.start();
 	}
 
 	public void start() {
 		do {
-			System.out.println("You are in " + getCurrentRoom());
+			System.out.println("You are in " + getCurrentRoomName());
 			System.out.println("What do you want to do?");
 			System.out.print("> ");
 			// Read a command from the user (stdin)

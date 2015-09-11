@@ -8,8 +8,18 @@ public class Room {
 	private boolean gameIsWon;
 	private String name;
 
+	public Room(String name, boolean gameIsWon, Room n, Room s, Room e, Room w) {
+		this.gameIsWon = gameIsWon;
+		this.name = name;
+		this.northRoom = n;
+		this.southRoom = s;
+		this.eastRoom = e;
+		this.westRoom = w;
+	}
+	
 	public Room(String name, boolean gameIsWon) {
 		this.gameIsWon = gameIsWon;
+		this.name = name;
 	}
 
 	public String getName() {
@@ -36,6 +46,7 @@ public class Room {
 		if (northRoom != null) {
 			return northRoom;
 		} else {
+			System.out.println("No way !");
 			return this;
 		}
 	}
@@ -44,6 +55,7 @@ public class Room {
 		if (southRoom != null) {
 			return northRoom;
 		} else {
+			System.out.println("No way !");
 			return this;
 		}
 	}
@@ -52,6 +64,7 @@ public class Room {
 		if (eastRoom != null) {
 			return northRoom;
 		} else {
+			System.out.println("No way !");
 			return this;
 		}
 	}
@@ -60,6 +73,7 @@ public class Room {
 		if (westRoom != null) {
 			return northRoom;
 		} else {
+			System.out.println("No way !");
 			return this;
 		}
 	}
