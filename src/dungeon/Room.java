@@ -8,17 +8,8 @@ public class Room {
 	private boolean gameIsWon;
 	private String name;
 
-	public Room(String name, boolean gameIsWon, Room n, Room s, Room e, Room w) {
-		this.gameIsWon = gameIsWon;
-		this.name = name;
-		this.northRoom = n;
-		this.southRoom = s;
-		this.eastRoom = e;
-		this.westRoom = w;
-	}
 	
-	public Room(String name, boolean gameIsWon) {
-		this.gameIsWon = gameIsWon;
+	public Room(String name) {
 		this.name = name;
 	}
 
@@ -26,19 +17,11 @@ public class Room {
 		return name;
 	}
 
-	public void setNorthRoom(Room northRoom) {
+	
+	public void setRooms(Room northRoom, Room southRoom, Room eastRoom, Room westRoom){
 		this.northRoom = northRoom;
-	}
-
-	public void setSouthRoom(Room southRoom) {
 		this.southRoom = southRoom;
-	}
-
-	public void setEastRoom(Room eastRoom) {
 		this.eastRoom = eastRoom;
-	}
-
-	public void setWestRoom(Room westRoom) {
 		this.westRoom = westRoom;
 	}
 

@@ -10,20 +10,24 @@ public class Dungeon {
 	protected final Scanner scanner = new Scanner(System.in);
 	protected List<Room> roomList;
 
-	public Dungeon(Room entrance) {
-		this.currentRoom = entrance;
+	public Dungeon() {
+
 		this.roomList = new ArrayList<Room>();
 		createDungeon();
+		this.currentRoom = this.roomList.get(0);
 	}
 
 	private void createDungeon() {
-
+		roomList.add(new Room("entrance"));
+		roomList.add(new Room("empty"));
+		roomList.add(new Room("trap"));
+		roomList.add(new Room("exit"));
 	}
 
 	public Room getCurrentRoom() {
 		return currentRoom;
 	}
-	
+
 	public String getCurrentRoomName() {
 		return currentRoom.getName();
 	}
@@ -42,12 +46,7 @@ public class Dungeon {
 	}
 
 	public static void main(String[] args) {
-		Room exit = new Room("exit", true);
-		Room trap = new Room("trap", true);
-		Room intersec = new Room("intersection", false, exit, null, trap, null);
-		Room entrance = new Room("entrance", false, intersec, null, null, null);
-		
-		Dungeon dungeon = new Dungeon(entrance);
+		Dungeon dungeon = new Dungeon();
 		dungeon.start();
 	}
 
