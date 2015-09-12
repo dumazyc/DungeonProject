@@ -65,4 +65,31 @@ public class Room {
 		return gameIsWon;
 	}
 
+	@Override
+	public String toString() {
+		String response = name+" : ";
+		if(northRoom!=null){
+			response+=northRoom.getName()+" ";
+		}else{
+			response+="null ";
+		}
+		if(southRoom!=null){
+			response+=southRoom.getName()+" ";
+		}else{
+			response+="null ";
+		}
+		if(eastRoom!=null){
+			response+=eastRoom.getName()+" ";
+		}else{
+			response+="null ";
+		}
+		if(westRoom!=null){
+			response+=westRoom.getName()+" ";
+		}else{
+			response+="null ";
+		}
+		return response;
+	}
+	
+
 }

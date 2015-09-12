@@ -20,8 +20,23 @@ public class Dungeon {
 	private void createDungeon() {
 		roomList.add(new Room("entrance"));
 		roomList.add(new Room("empty"));
+		roomList.add(new Room("empty"));
 		roomList.add(new Room("trap"));
+		roomList.add(new Room("chest"));
+		roomList.add(new Room("chest"));
+		roomList.add(new Room("monster"));
+		roomList.add(new Room("button"));
 		roomList.add(new Room("exit"));
+		roomList.get(0).setRooms(roomList.get(1), null, null, null);
+		roomList.get(1).setRooms(roomList.get(6), roomList.get(0), null,roomList.get(5));
+		roomList.get(2).setRooms(roomList.get(8), roomList.get(7), null,roomList.get(6));
+		roomList.get(3).setRooms(null, roomList.get(4), null, null);
+		roomList.get(4).setRooms(roomList.get(3), roomList.get(5),roomList.get(6), null);
+		roomList.get(5).setRooms(roomList.get(4), null, roomList.get(1), null);
+		roomList.get(6).setRooms(null, roomList.get(1), roomList.get(2),roomList.get(4));
+		roomList.get(7).setRooms(roomList.get(2), null, null, null);
+		roomList.get(8).setRooms(null, roomList.get(2), null, null);
+		
 	}
 
 	public Room getCurrentRoom() {
