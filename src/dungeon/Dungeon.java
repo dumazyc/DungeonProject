@@ -4,12 +4,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents a dungeon
+ * A dungeon has an entrance and many rooms
+ */
 public class Dungeon {
+	
+	/**
+	 * The room in which the player is
+	 */
 	protected Room currentRoom;
+	
+	/**
+	 * Says if the game is finished or not
+	 */
 	protected boolean gameIsFinished = false;
+	
+	/**
+	 * Used to catch the player's commands
+	 */
 	protected final Scanner scanner = new Scanner(System.in);
+	
+	/**
+	 * The list which contains the different rooms of the dungeon
+	 */
 	protected List<Room> roomList;
 
+	/**
+	 * Creates a new dungeon and defines the currentRoom
+	 * The currentRoom is where the player begin
+	 */
 	public Dungeon() {
 
 		this.roomList = new ArrayList<Room>();
@@ -17,6 +41,9 @@ public class Dungeon {
 		this.currentRoom = this.roomList.get(0);
 	}
 	
+	/**
+	 * Defines the different rooms and associates them
+	 */
 	private void createDungeon() {
 		roomList.add(new Room("the entrance"));
 		roomList.add(new Room("an empty room"));
@@ -42,15 +69,27 @@ public class Dungeon {
 		roomList.get(8).setRooms(null, roomList.get(2), null, null);
 
 	}
-
+	
+	/**
+	 * Gets the current room
+	 * @return this current room
+	 */
 	public Room getCurrentRoom() {
 		return currentRoom;
 	}
 
+	/**
+	 * Gets the current room's name
+	 * @return this current room's name
+	 */
 	public String getCurrentRoomName() {
 		return currentRoom.getName();
 	}
 
+	/**
+	 * Interprets the command typed by the player
+	 * @param command
+	 */
 	public void interpretCommand(String command) {
 		switch (command) {
 		case "inspect":
@@ -72,12 +111,11 @@ public class Dungeon {
 			System.out.println("I don't know what you mean");
 		}
 	}
-
-	public static void main(String[] args) {
-		Dungeon dungeon = new Dungeon();
-		dungeon.start();
-	}
-
+	
+	/**
+	 * Begins the interaction with the player
+	 * Gives current room's name and asks for a command
+	 */
 	public void start() {
 		do {
 			System.out.println("You are in " + getCurrentRoomName());
@@ -95,15 +133,36 @@ public class Dungeon {
 		}
 	}
 
+	/**
+	 * Says if the game is finished or not
+	 * @return true if the game is won/lost
+	 */
 	public boolean gameIsFinished() {
 		return gameIsLost() || gameIsWon();
 	}
 
+	/**
+	 * Asks to the current room if the game is lost when the player enters in
+	 * @return {@link Room#gameIsLost()}
+	 */
 	public boolean gameIsLost() {
 		return currentRoom.gameIsLost();
 	}
 
+	/**
+	 * Asks to the current room if the game is won when the player enters in
+	 * @return {@link Room#gameIsWon()}
+	 */
 	public boolean gameIsWon() {
 		return currentRoom.gameIsWon();
+	}
+	
+	/**
+	 * Main method
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Dungeon dungeon = new Dungeon();
+		dungeon.start();
 	}
 }
