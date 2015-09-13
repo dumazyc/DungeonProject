@@ -16,17 +16,17 @@ public class Dungeon {
 		createDungeon();
 		this.currentRoom = this.roomList.get(0);
 	}
-
+	
 	private void createDungeon() {
 		roomList.add(new Room("the entrance"));
 		roomList.add(new Room("an empty room"));
 		roomList.add(new Room("an empty room"));
-		roomList.add(new Room("a trap"));
+		roomList.add(new TrapRoom("a trap"));
 		roomList.add(new Room("a chest room"));
 		roomList.add(new Room("a chest room"));
 		roomList.add(new Room("a monster room"));
 		roomList.add(new Room("a button room"));
-		roomList.add(new Room("the exit"));
+		roomList.add(new ExitRoom("the exit"));
 		roomList.get(0).setRooms(roomList.get(1), null, null, null);
 		roomList.get(1).setRooms(roomList.get(6), roomList.get(0), null,
 				roomList.get(5));
@@ -100,10 +100,10 @@ public class Dungeon {
 	}
 
 	public boolean gameIsLost() {
-		return currentRoom.equals("a trap");
+		return currentRoom.gameIsLost();
 	}
 
 	public boolean gameIsWon() {
-		return currentRoom.equals("the exit");
+		return currentRoom.gameIsWon();
 	}
 }

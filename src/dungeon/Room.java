@@ -5,7 +5,6 @@ public class Room {
 	private Room southRoom;
 	private Room eastRoom;
 	private Room westRoom;
-	private boolean gameIsWon;
 	private String name;
 
 	public Room(String name) {
@@ -61,7 +60,11 @@ public class Room {
 	}
 
 	public boolean gameIsWon() {
-		return gameIsWon;
+		return false;
+	}
+	
+	public boolean gameIsLost() {
+		return false;
 	}
 
 	@Override
