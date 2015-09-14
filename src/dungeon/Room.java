@@ -62,7 +62,7 @@ public class Room {
 	public boolean gameIsWon() {
 		return false;
 	}
-	
+
 	public boolean gameIsLost() {
 		return false;
 	}
