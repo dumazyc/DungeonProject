@@ -13,7 +13,7 @@ public class Monster extends Character{
 		super("dragon", 20, 0, 5, 20);
 	}
 	
-	public void sendDammage(Player player){
+	public void sendDammage(Character player){
 		Random rand = new Random();
 		//2% luck to make a critical hit
 		if(rand.nextInt(51) == 50){
