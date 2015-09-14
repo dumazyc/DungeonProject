@@ -125,7 +125,7 @@ public class Dungeon {
 			String line = scanner.nextLine();
 			interpretCommand(line);
 		} while (!gameIsFinished());
-		System.out.println("You are in " + getCurrentRoom());
+		System.out.println("You are in " + getCurrentRoomName());
 		if (gameIsWon()) {
 			System.out.println("You win!");
 		} else {

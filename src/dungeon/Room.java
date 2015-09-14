@@ -1,11 +1,11 @@
 package dungeon;
 
 public class Room {
-	private Room northRoom;
-	private Room southRoom;
-	private Room eastRoom;
-	private Room westRoom;
-	private String name;
+	protected Room northRoom;
+	protected Room southRoom;
+	protected Room eastRoom;
+	protected Room westRoom;
+	protected String name;
 
 	public Room(String name) {
 		this.name = name;
