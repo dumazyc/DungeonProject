@@ -31,6 +31,11 @@ public class Dungeon {
 	protected List<Room> roomList;
 
 	/**
+	 * The player
+	 */
+	protected Player player;
+	
+	/**
 	 * Creates a new dungeon and defines the currentRoom
 	 * The currentRoom is where the player begin
 	 */
@@ -39,6 +44,7 @@ public class Dungeon {
 		this.roomList = new ArrayList<Room>();
 		createDungeon();
 		this.currentRoom = this.roomList.get(0);
+		this.player = new Player();
 	}
 	
 	/**
@@ -117,6 +123,10 @@ public class Dungeon {
 	 * Gives current room's name and asks for a command
 	 */
 	public void start() {
+		System.out.println("What is you name sir ?");
+		player.setName(scanner.nextLine());
+		System.out.println("Welcome, "+player.getName());
+		
 		do {
 			System.out.println("You are in " + getCurrentRoomName());
 			System.out.println("What do you want to do?");
@@ -146,7 +156,7 @@ public class Dungeon {
 	 * @return {@link Room#gameIsLost()}
 	 */
 	public boolean gameIsLost() {
-		return currentRoom.gameIsLost();
+		return currentRoom.gameIsLost() || player.isDead();
 	}
 
 	/**

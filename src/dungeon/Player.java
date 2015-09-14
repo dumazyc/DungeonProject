@@ -21,4 +21,12 @@ public class Player extends Character{
 		}
 			monster.receiveDammage(rand.nextInt(maximalDammage - minimalDammage + 1) + minimalDammage);	
 	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
 }
