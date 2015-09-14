@@ -5,7 +5,7 @@ import java.util.Random;
 public class Monster extends Character{
 	
 	public Monster(String name){
-		super(name, 20, 0, 5, 20);
+		super(name, 20, 1, 5, 20);
 	}
 	
 	public void sendDammage(Character player){
