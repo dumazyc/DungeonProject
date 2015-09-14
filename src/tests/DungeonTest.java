@@ -14,12 +14,12 @@ public class DungeonTest {
 
 	@Before
 	public void createDungeon() {
-		Room exit = new Room("exit", true);
-		Room trap = new Room("trap", true);
-		Room intersec = new Room("intersection", false, exit, null, trap, null);
-		Room entrance = new Room("entrance", false, intersec, null, null, null);
+		Room exit = new Room("exit");
+		Room trap = new Room("trap");
+		Room intersec = new Room("intersection");
+		Room entrance = new Room("entrance");
 		
-		dungeon = new Dungeon(entrance);
+		dungeon = new Dungeon();
 	}
 
 	@Test
