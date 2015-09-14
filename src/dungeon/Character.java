@@ -3,11 +3,11 @@ package dungeon;
 import java.util.Random;
 
 public abstract class Character {
-	private String name;
-	private int pdv;
-	private int minimalDammage;
-	private int maximalDammage;
-	private int criticalHit;
+	protected String name;
+	protected int pdv;
+	protected int minimalDammage;
+	protected int maximalDammage;
+	protected int criticalHit;
 	
 	public Character(){}
 	
