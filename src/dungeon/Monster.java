@@ -3,14 +3,9 @@ package dungeon;
 import java.util.Random;
 
 public class Monster extends Character{
-	private String name;
-	private int pdv;
-	private int minimalDammage;
-	private int maximalDammage;
-	private int criticalHit;
 	
-	public Monster(){
-		super("dragon", 20, 0, 5, 20);
+	public Monster(String name){
+		super(name, 20, 0, 5, 20);
 	}
 	
 	public void sendDammage(Character player){
@@ -19,6 +14,6 @@ public class Monster extends Character{
 		if(rand.nextInt(51) == 50){
 			player.receiveDammage(this.criticalHit);
 		}
-			player.receiveDammage(rand.nextInt(maximalDammage - minimalDammage + 1) + minimalDammage);		
+			player.receiveDammage(rand.nextInt(this.maximalDammage - this.minimalDammage + 1) + this.minimalDammage);		
 	}
 }
