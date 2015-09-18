@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import dungeon.Room.State;
+
 /**
  * Represents a dungeon A dungeon has an entrance and many rooms
  */
@@ -39,7 +41,6 @@ public class Dungeon {
 	 * where the player begin
 	 */
 	public Dungeon() {
-
 		this.roomList = new ArrayList<Room>();
 		createDungeon();
 		this.currentRoom = this.roomList.get(0);
@@ -59,20 +60,18 @@ public class Dungeon {
 		roomList.add(new Room("a monster room"));
 		roomList.add(new Room("a button room"));
 		roomList.add(new ExitRoom("the exit"));
+		
 		roomList.get(0).setRooms(roomList.get(1), null, null, null);
-		roomList.get(1).setRooms(roomList.get(6), roomList.get(0), null,
-				roomList.get(5));
-		roomList.get(2).setRooms(roomList.get(8), roomList.get(7), null,
-				roomList.get(6));
+		roomList.get(1).setRooms(roomList.get(6), roomList.get(0), null, roomList.get(5));
+		roomList.get(2).setRooms(roomList.get(8), roomList.get(7), null, roomList.get(6));
 		roomList.get(3).setRooms(null, roomList.get(4), null, null);
-		roomList.get(4).setRooms(roomList.get(3), roomList.get(5),
-				roomList.get(6), null);
+		roomList.get(4).setRooms(roomList.get(3), roomList.get(5), roomList.get(6), null);
 		roomList.get(5).setRooms(roomList.get(4), null, roomList.get(1), null);
-		roomList.get(6).setRooms(null, roomList.get(1), roomList.get(2),
-				roomList.get(4));
+		roomList.get(6).setRooms(null, roomList.get(1), roomList.get(2), roomList.get(4));
 		roomList.get(7).setRooms(roomList.get(2), null, null, null);
 		roomList.get(8).setRooms(null, roomList.get(2), null, null);
-
+		
+		roomList.get(4).setDoorState(roomList.get(5), State.CLOSED);
 	}
 
 	/**
@@ -134,8 +133,7 @@ public class Dungeon {
 			System.out.println("What do you want to do?");
 			System.out.print("> ");
 			// Read a command from the user (stdin)
-			String line = scanner.nextLine();
-			interpretCommand(line);
+			interpretCommand(scanner.nextLine());
 		} while (!gameIsFinished());
 		System.out.println("You are in " + getCurrentRoomName());
 		if (gameIsWon()) {

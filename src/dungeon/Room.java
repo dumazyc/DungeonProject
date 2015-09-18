@@ -1,30 +1,66 @@
 package dungeon;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import dungeon.Room.State;
+
 public class Room {
 	protected Room northRoom;
 	protected Room southRoom;
 	protected Room eastRoom;
 	protected Room westRoom;
+	protected Map<Room, State> doorStates;
 	protected String name;
+	
+	protected enum State {
+		OPENED, CLOSED, HIDDEN
+	};
 
 	public Room(String name) {
 		this.name = name;
+		this.doorStates = new HashMap<Room, State>();
 	}
-
+	
+	public State getDoorState(Room room) {
+		return doorStates.get(room);
+	}
+	
 	public String getName() {
 		return name;
 	}
 
-	public void setRooms(Room northRoom, Room southRoom, Room eastRoom,
-			Room westRoom) {
+	public void setDoorState(Room room, State state) {
+		doorStates.put(room, state);
+		room.doorStates.put(this, state);
+	}
+	
+	public void setRooms(Room northRoom, Room southRoom, Room eastRoom, Room westRoom) {
 		this.northRoom = northRoom;
 		this.southRoom = southRoom;
 		this.eastRoom = eastRoom;
 		this.westRoom = westRoom;
+		
+		this.doorStates.put(northRoom, State.OPENED);
+		this.doorStates.put(southRoom, State.OPENED);
+		this.doorStates.put(eastRoom, State.OPENED);
+		this.doorStates.put(westRoom, State.OPENED);
 	}
+	
+	
+
+//	public Room goToThisRoom(Room room) {
+//		if (room != null && getDoorState(room) == State.OPENED) {
+//			return room;
+//		} else {
+//			System.out.println("No way !");
+//			return this;
+//		}
+//	}
+	
 
 	public Room goToNorthRoom() {
-		if (northRoom != null) {
+		if ((northRoom != null) && (getDoorState(northRoom).equals(State.OPENED))) {
 			return northRoom;
 		} else {
 			System.out.println("No way !");
@@ -33,7 +69,7 @@ public class Room {
 	}
 
 	public Room goToSouthRoom() {
-		if (southRoom != null) {
+		if (southRoom != null && getDoorState(southRoom) == State.OPENED) {
 			return southRoom;
 		} else {
 			System.out.println("No way !");
@@ -42,7 +78,7 @@ public class Room {
 	}
 
 	public Room goToEastRoom() {
-		if (eastRoom != null) {
+		if (eastRoom != null && getDoorState(eastRoom) == State.OPENED) {
 			return eastRoom;
 		} else {
 			System.out.println("No way !");
@@ -51,7 +87,7 @@ public class Room {
 	}
 
 	public Room goToWestRoom() {
-		if (westRoom != null) {
+		if (westRoom != null && getDoorState(westRoom) == State.OPENED) {
 			return westRoom;
 		} else {
 			System.out.println("No way !");
