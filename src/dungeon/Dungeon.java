@@ -102,20 +102,8 @@ public class Dungeon {
 		case "inspect":
 			currentRoom.inspect();
 			break;
-		case "go north":
-			currentRoom = currentRoom.goToNorthRoom();
-			break;
-		case "go west":
-			currentRoom = currentRoom.goToWestRoom();
-			break;
-		case "go south":
-			currentRoom = currentRoom.goToSouthRoom();
-			break;
-		case "go east":
-			currentRoom = currentRoom.goToEastRoom();
-			break;
 		default:
-			System.out.println("I don't know what you mean");
+			currentRoom = currentRoom.interpretWhichRoom(command);
 		}
 	}
 
@@ -124,16 +112,16 @@ public class Dungeon {
 	 * for a command
 	 */
 	public void start() {
-		System.out.println("What is you name sir ?");
+		/*System.out.println("What is you name sir ?");
 		player.setName(scanner.nextLine());
-		System.out.println("Welcome, " + player.getName());
+		System.out.println("Welcome, " + player.getName());*/
 
 		do {
 			System.out.println("You are in " + getCurrentRoomName());
 			System.out.println("What do you want to do?");
 			System.out.print("> ");
 			// Read a command from the user (stdin)
-			interpretCommand(scanner.nextLine());
+			interpretCommand(scanner.nextLine().toLowerCase());
 		} while (!gameIsFinished());
 		System.out.println("You are in " + getCurrentRoomName());
 		if (gameIsWon()) {

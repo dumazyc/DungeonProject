@@ -12,7 +12,7 @@ public class Room {
 	protected Room westRoom;
 	protected Map<Room, State> doorStates;
 	protected String name;
-	
+
 	protected enum State {
 		OPENED, CLOSED, HIDDEN
 	};
@@ -21,11 +21,11 @@ public class Room {
 		this.name = name;
 		this.doorStates = new HashMap<Room, State>();
 	}
-	
+
 	public State getDoorState(Room room) {
 		return doorStates.get(room);
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -34,66 +34,62 @@ public class Room {
 		doorStates.put(room, state);
 		room.doorStates.put(this, state);
 	}
-	
-	public void setRooms(Room northRoom, Room southRoom, Room eastRoom, Room westRoom) {
+
+	public void setRooms(Room northRoom, Room southRoom, Room eastRoom,
+			Room westRoom) {
 		this.northRoom = northRoom;
 		this.southRoom = southRoom;
 		this.eastRoom = eastRoom;
 		this.westRoom = westRoom;
-		
+
 		this.doorStates.put(northRoom, State.OPENED);
 		this.doorStates.put(southRoom, State.OPENED);
 		this.doorStates.put(eastRoom, State.OPENED);
 		this.doorStates.put(westRoom, State.OPENED);
 	}
-	
-	
 
-//	public Room goToThisRoom(Room room) {
-//		if (room != null && getDoorState(room) == State.OPENED) {
-//			return room;
-//		} else {
-//			System.out.println("No way !");
-//			return this;
-//		}
-//	}
-	
-
-	public Room goToNorthRoom() {
-		if ((northRoom != null) && (getDoorState(northRoom).equals(State.OPENED))) {
-			return northRoom;
+	private Room goToThisRoom(Room room) {
+		if (room != null && getDoorState(room) == State.OPENED) {
+			return room;
 		} else {
 			System.out.println("No way !");
 			return this;
 		}
 	}
 
-	public Room goToSouthRoom() {
-		if (southRoom != null && getDoorState(southRoom) == State.OPENED) {
-			return southRoom;
-		} else {
-			System.out.println("No way !");
+	public Room interpretWhichRoom(String command) {
+		switch (command) {
+		case "go north":
+			return goToThisRoom(this.northRoom);
+		case "go west":
+			return goToThisRoom(this.westRoom);
+		case "go south":
+			return goToThisRoom(this.southRoom);
+		case "go east":
+			return goToThisRoom(this.eastRoom);
+		default:
+			System.out.println("I don't know what you mean");
 			return this;
 		}
 	}
 
-	public Room goToEastRoom() {
-		if (eastRoom != null && getDoorState(eastRoom) == State.OPENED) {
-			return eastRoom;
-		} else {
-			System.out.println("No way !");
-			return this;
-		}
-	}
-
-	public Room goToWestRoom() {
-		if (westRoom != null && getDoorState(westRoom) == State.OPENED) {
-			return westRoom;
-		} else {
-			System.out.println("No way !");
-			return this;
-		}
-	}
+	/*
+	 * public Room goToNorthRoom() { if ((northRoom != null) &&
+	 * (getDoorState(northRoom).equals(State.OPENED))) { return northRoom; }
+	 * else { System.out.println("No way !"); return this; } }
+	 * 
+	 * public Room goToSouthRoom() { if (southRoom != null &&
+	 * getDoorState(southRoom) == State.OPENED) { return southRoom; } else {
+	 * System.out.println("No way !"); return this; } }
+	 * 
+	 * public Room goToEastRoom() { if (eastRoom != null &&
+	 * getDoorState(eastRoom) == State.OPENED) { return eastRoom; } else {
+	 * System.out.println("No way !"); return this; } }
+	 * 
+	 * public Room goToWestRoom() { if (westRoom != null &&
+	 * getDoorState(westRoom) == State.OPENED) { return westRoom; } else {
+	 * System.out.println("No way !"); return this; } }
+	 */
 
 	public boolean gameIsWon() {
 		return false;
