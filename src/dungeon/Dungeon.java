@@ -60,18 +60,26 @@ public class Dungeon {
 		roomList.add(new Room("a monster room"));
 		roomList.add(new Room("a button room"));
 		roomList.add(new ExitRoom("the exit"));
-		
+
 		roomList.get(0).setRooms(roomList.get(1), null, null, null);
-		roomList.get(1).setRooms(roomList.get(6), roomList.get(0), null, roomList.get(5));
-		roomList.get(2).setRooms(roomList.get(8), roomList.get(7), null, roomList.get(6));
+		roomList.get(1).setRooms(roomList.get(6), roomList.get(0), null,
+				roomList.get(5));
+		roomList.get(2).setRooms(roomList.get(8), roomList.get(7), null,
+				roomList.get(6));
 		roomList.get(3).setRooms(null, roomList.get(4), null, null);
-		roomList.get(4).setRooms(roomList.get(3), roomList.get(5), roomList.get(6), null);
+		roomList.get(4).setRooms(roomList.get(3), roomList.get(5),
+				roomList.get(6), null);
 		roomList.get(5).setRooms(roomList.get(4), null, roomList.get(1), null);
-		roomList.get(6).setRooms(null, roomList.get(1), roomList.get(2), roomList.get(4));
+		roomList.get(6).setRooms(null, roomList.get(1), roomList.get(2),
+				roomList.get(4));
 		roomList.get(7).setRooms(roomList.get(2), null, null, null);
 		roomList.get(8).setRooms(null, roomList.get(2), null, null);
-		
+
 		roomList.get(4).setDoorState(roomList.get(5), State.CLOSED);
+		roomList.get(4).setDoorState(roomList.get(6), State.CLOSED);
+		roomList.get(2).setDoorState(roomList.get(8), State.CLOSED);
+		roomList.get(2).setDoorState(roomList.get(6), State.CLOSED);
+		roomList.get(2).setDoorState(roomList.get(7), State.HIDDEN);
 	}
 
 	/**
@@ -112,9 +120,11 @@ public class Dungeon {
 	 * for a command
 	 */
 	public void start() {
-		/*System.out.println("What is you name sir ?");
-		player.setName(scanner.nextLine());
-		System.out.println("Welcome, " + player.getName());*/
+		/*
+		 * System.out.println("What is you name sir ?");
+		 * player.setName(scanner.nextLine()); System.out.println("Welcome, " +
+		 * player.getName());
+		 */
 
 		do {
 			System.out.println("You are in " + getCurrentRoomName());
