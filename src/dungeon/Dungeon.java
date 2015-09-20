@@ -34,7 +34,7 @@ public class Dungeon {
 	/**
 	 * The player
 	 */
-	protected Player player;
+	protected static Player player;
 
 	/**
 	 * Creates a new dungeon and defines the currentRoom The currentRoom is
@@ -57,7 +57,7 @@ public class Dungeon {
 		roomList.add(new TrapRoom("a trap"));
 		roomList.add(new Room("a chest room"));
 		roomList.add(new Room("a chest room"));
-		roomList.add(new Room("a monster room"));
+		roomList.add(new MonsterRoom("a monster room"));
 		roomList.add(new Room("a button room"));
 		roomList.add(new ExitRoom("the exit"));
 
@@ -111,7 +111,7 @@ public class Dungeon {
 			currentRoom.inspect();
 			break;
 		default:
-			currentRoom = currentRoom.interpretWhichRoom(command);
+			currentRoom = currentRoom.interpretCommand(command);
 		}
 	}
 

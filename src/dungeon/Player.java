@@ -18,6 +18,7 @@ public class Player extends Character{
 		//2% luck to make a critical hit
 		if(rand.nextInt(21) == 20){
 			monster.receiveDammage(this.criticalHit);
+			System.out.println("Critical hit !");
 		}
 			monster.receiveDammage(rand.nextInt(maximalDammage - minimalDammage + 1) + minimalDammage);	
 	}

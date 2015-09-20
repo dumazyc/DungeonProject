@@ -32,8 +32,10 @@ public class Room {
 	}
 
 	public void setDoorState(Room room, State state) {
-		doorStates.put(room, state);
+		if (room != null) {
+			doorStates.put(room, state);
 		room.doorStates.put(this, state);
+		}
 	}
 
 	public void setRooms(Room northRoom, Room southRoom, Room eastRoom,
@@ -56,6 +58,8 @@ public class Room {
 
 	private Room goToThisRoom(Room room) {
 		if (room != null && getDoorState(room) == State.OPENED) {
+			if (room instanceof MonsterRoom)
+				((MonsterRoom) room).setLastRoom(this);
 			return room;
 		} else {
 			System.out.println("No way !");
@@ -63,7 +67,7 @@ public class Room {
 		}
 	}
 
-	public Room interpretWhichRoom(String command) {
+	public Room interpretCommand(String command) {
 		switch (command) {
 		case "go north":
 			return goToThisRoom(this.northRoom);
