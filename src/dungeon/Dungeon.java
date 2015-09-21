@@ -127,7 +127,7 @@ public class Dungeon {
 		 */
 
 		do {
-			System.out.println("You are in " + getCurrentRoomName());
+			getCurrentRoom().enterTheRoom();
 			System.out.println("What do you want to do?");
 			System.out.print("> ");
 			// Read a command from the user (stdin)

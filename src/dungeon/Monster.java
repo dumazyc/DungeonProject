@@ -2,18 +2,20 @@ package dungeon;
 
 import java.util.Random;
 
-public class Monster extends Character{
-	
-	public Monster(String name){
-		super(name, 20, 1, 5, 20);
+public class Monster extends Character {
+
+	public Monster(String name) {
+		super(name, 2, 1, 5, 20);
 	}
-	
-	public void sendDammage(Character player){
+
+	public void sendDammage(Character player) {
 		Random rand = new Random();
-		//2% luck to make a critical hit
-		if(rand.nextInt(51) == 50){
+		// 2% luck to make a critical hit
+		if (rand.nextInt(51) == 50) {
 			player.receiveDammage(this.criticalHit);
 		}
-			player.receiveDammage(rand.nextInt(this.maximalDammage - this.minimalDammage + 1) + this.minimalDammage);		
+		player.receiveDammage(rand.nextInt(this.maximalDammage
+				- this.minimalDammage + 1)
+				+ this.minimalDammage);
 	}
 }

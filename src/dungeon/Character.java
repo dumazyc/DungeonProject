@@ -1,34 +1,36 @@
 package dungeon;
 
-import java.util.Random;
-
 public abstract class Character {
 	protected String name;
 	protected int healthPoints;
 	protected int minimalDammage;
 	protected int maximalDammage;
 	protected int criticalHit;
-	
-	public Character(){}
-	
-	public Character(String name, int healthPoints, int minimalDammage, int maximalDammage, int criticalHit){
+
+	public Character() {
+	}
+
+	public Character(String name, int healthPoints, int minimalDammage,
+			int maximalDammage, int criticalHit) {
 		this.name = name;
 		this.healthPoints = healthPoints;
 		this.minimalDammage = minimalDammage;
 		this.maximalDammage = maximalDammage;
 		this.criticalHit = criticalHit;
 	}
-	
-	public boolean isDead(){
+
+	public boolean isDead() {
 		return healthPoints <= 0;
 	}
-	
-	public void receiveDammage(int dammage){
+
+	public void receiveDammage(int dammage) {
 		this.healthPoints -= dammage;
 	}
-	
-	public int getHealthPoints(){
+
+	public int getHealthPoints() {
 		return this.healthPoints;
 	}
-	public void sendDammage(Character Character){}
+
+	public void sendDammage(Character Character) {
+	}
 }

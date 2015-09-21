@@ -1,10 +1,7 @@
 package dungeon;
 
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
-
-import dungeon.Room.State;
 
 public class Room {
 	protected Room northRoom;
@@ -17,6 +14,11 @@ public class Room {
 	protected enum State {
 		OPENED, CLOSED, HIDDEN
 	};
+
+	public void enterTheRoom() {
+		System.out.println("You are in " + name + ".");
+
+	}
 
 	public Room(String name) {
 		this.name = name;
@@ -34,7 +36,7 @@ public class Room {
 	public void setDoorState(Room room, State state) {
 		if (room != null) {
 			doorStates.put(room, state);
-		room.doorStates.put(this, state);
+			room.doorStates.put(this, state);
 		}
 	}
 
@@ -56,7 +58,7 @@ public class Room {
 		}
 	}
 
-	private Room goToThisRoom(Room room) {
+	protected Room goToThisRoom(Room room) {
 		if (room != null && getDoorState(room) == State.OPENED) {
 			if (room instanceof MonsterRoom)
 				((MonsterRoom) room).setLastRoom(this);
@@ -77,8 +79,12 @@ public class Room {
 			return goToThisRoom(this.southRoom);
 		case "go east":
 			return goToThisRoom(this.eastRoom);
+		case "help":
+			System.out
+					.println("In a normal room, you can : \n - go north \n - go south \n - go east \n - go west \n - inspect ");
+			return this;
 		default:
-			System.out.println("I don't know what you mean");
+			System.out.println("You can't do that !");
 			return this;
 		}
 	}
