@@ -52,13 +52,13 @@ public class Dungeon {
 	 */
 	private void createDungeon() {
 		roomList.add(new Room("the entrance"));
-		roomList.add(new Room("an empty room"));
-		roomList.add(new Room("an empty room"));
+		roomList.add(new Room("a room"));
+		roomList.add(new Room("a room"));
 		roomList.add(new TrapRoom("a trap"));
-		roomList.add(new Room("a chest room"));
-		roomList.add(new Room("a chest room"));
+		roomList.add(new ChestRoom("a room"));
+		roomList.add(new ChestRoom("a room"));
 		roomList.add(new MonsterRoom("a monster room"));
-		roomList.add(new ButtonRoom("a button room", roomList.get(5),roomList.get(4)));
+		roomList.add(new ButtonRoom("a room", roomList.get(5),roomList.get(4)));
 		roomList.add(new ExitRoom("the exit"));
 
 		roomList.get(0).setRooms(roomList.get(1), null, null, null);

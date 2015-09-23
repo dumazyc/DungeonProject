@@ -90,7 +90,7 @@ public class Room {
 			return goToThisRoom(this.eastRoom);
 		case "help":
 			System.out
-					.println("In a normal room, you can : \n - go north \n - go south \n - go east \n - go west \n - inspect ");
+					.println("In a normal room, you can : \n - go north \n - go south \n - go east \n - go west \n - inspect \n - hit button ");
 			return this;
 		default:
 			System.out.println("You can't do that !");
