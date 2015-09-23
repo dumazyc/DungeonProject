@@ -58,7 +58,7 @@ public class Dungeon {
 		roomList.add(new Room("a chest room"));
 		roomList.add(new Room("a chest room"));
 		roomList.add(new MonsterRoom("a monster room"));
-		roomList.add(new ButtonRoom("a button room", roomList.get(5)));
+		roomList.add(new ButtonRoom("a button room", roomList.get(5),roomList.get(4)));
 		roomList.add(new ExitRoom("the exit"));
 
 		roomList.get(0).setRooms(roomList.get(1), null, null, null);
