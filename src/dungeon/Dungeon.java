@@ -44,7 +44,7 @@ public class Dungeon {
 		this.roomList = new ArrayList<Room>();
 		createDungeon();
 		this.currentRoom = this.roomList.get(0);
-		this.player = new Player();
+		Dungeon.player = new Player();
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class Dungeon {
 		roomList.add(new Room("a chest room"));
 		roomList.add(new Room("a chest room"));
 		roomList.add(new MonsterRoom("a monster room"));
-		roomList.add(new Room("a button room"));
+		roomList.add(new ButtonRoom("a button room", roomList.get(5)));
 		roomList.add(new ExitRoom("the exit"));
 
 		roomList.get(0).setRooms(roomList.get(1), null, null, null);
@@ -79,7 +79,7 @@ public class Dungeon {
 		roomList.get(4).setDoorState(roomList.get(6), State.CLOSED);
 		roomList.get(2).setDoorState(roomList.get(8), State.CLOSED);
 		roomList.get(2).setDoorState(roomList.get(6), State.CLOSED);
-		roomList.get(2).setDoorState(roomList.get(7), State.HIDDEN);
+//		roomList.get(2).setDoorState(roomList.get(7), State.HIDDEN);
 	}
 
 	/**

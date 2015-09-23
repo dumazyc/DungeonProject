@@ -41,11 +41,8 @@ public class MonsterRoom extends Room {
 					System.out.println("Monster's HPs: "
 							+ this.monster.getHealthPoints());
 				} else {
-					setDoorState(this.northRoom, State.OPENED);
-					setDoorState(this.southRoom, State.OPENED);
-					setDoorState(this.eastRoom, State.OPENED);
-					setDoorState(this.westRoom, State.OPENED);
-
+					openRooms();
+					
 					System.out
 							.println("The monster is dead. Doors are now open.");
 					System.out.println("Your HPs: "

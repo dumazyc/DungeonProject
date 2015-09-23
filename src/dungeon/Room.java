@@ -3,6 +3,8 @@ package dungeon;
 import java.util.Hashtable;
 import java.util.Map;
 
+import dungeon.Room.State;
+
 public class Room {
 	protected Room northRoom;
 	protected Room southRoom;
@@ -67,6 +69,13 @@ public class Room {
 			System.out.println("No way !");
 			return this;
 		}
+	}
+	
+	public void openRooms() {
+		setDoorState(this.northRoom, State.OPENED);
+		setDoorState(this.southRoom, State.OPENED);
+		setDoorState(this.eastRoom, State.OPENED);
+		setDoorState(this.westRoom, State.OPENED);
 	}
 
 	public Room interpretCommand(String command) {
