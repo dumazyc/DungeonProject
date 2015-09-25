@@ -6,40 +6,22 @@ import java.util.Scanner;
 
 import dungeon.Room.State;
 
-/**
- * Represents a dungeon A dungeon has an entrance and many rooms
- */
+
 public class Dungeon {
 
-	/**
-	 * The room in which the player is
-	 */
+
 	protected Room currentRoom;
 
-	/**
-	 * Says if the game is finished or not
-	 */
-	protected boolean gameIsFinished = false;
 
-	/**
-	 * Used to catch the player's commands
-	 */
 	protected final Scanner scanner = new Scanner(System.in);
 
-	/**
-	 * The list which contains the different rooms of the dungeon
-	 */
+
 	protected List<Room> roomList;
 
-	/**
-	 * The player
-	 */
+	
 	protected static Player player;
 
-	/**
-	 * Creates a new dungeon and defines the currentRoom The currentRoom is
-	 * where the player begin
-	 */
+
 	public Dungeon() {
 		this.roomList = new ArrayList<Room>();
 		createDungeon();
@@ -128,6 +110,9 @@ public class Dungeon {
 
 		do {
 			getCurrentRoom().enterTheRoom();
+			if (gameIsFinished()) {
+				break;
+			}
 			System.out.println("What do you want to do?");
 			System.out.print("> ");
 			// Read a command from the user (stdin)

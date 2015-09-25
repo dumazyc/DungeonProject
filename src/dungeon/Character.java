@@ -28,7 +28,8 @@ public abstract class Character {
 	}
 
 	public int getHealthPoints() {
-		return this.healthPoints;
+		
+		return this.healthPoints>=0?this.healthPoints:0;
 	}
 
 	public void sendDammage(Character Character) {

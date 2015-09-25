@@ -7,7 +7,7 @@ public class TrapRoom extends Room {
 	}
 
 	public boolean gameIsLost() {
-		return false;
+		return Dungeon.player.isDead();
 	}
 
 	public void enterTheRoom() {
