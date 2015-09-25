@@ -12,7 +12,6 @@ import rooms.ExitRoom;
 import rooms.MonsterRoom;
 import rooms.Room;
 import rooms.TrapRoom;
-import rooms.Room.State;
 
 
 public class Dungeon {

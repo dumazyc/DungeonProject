@@ -1,19 +1,20 @@
 package rooms;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
 
-public class Room {
-	protected Room northRoom;
-	protected Room southRoom;
-	protected Room eastRoom;
-	protected Room westRoom;
-	protected Map<Room, State> doorStates;
-	protected String name;
+import passages.Passage;
 
-	public enum State {
-		OPENED, CLOSED, HIDDEN
-	};
+public class Room {
+//	protected Room northRoom;
+//	protected Room southRoom;
+//	protected Room eastRoom;
+//	protected Room westRoom;
+
+	protected List<Passage> passages;
+	protected String name;
 
 	public void enterTheRoom() {
 		System.out.println("You are in " + name + ".");
@@ -22,46 +23,23 @@ public class Room {
 
 	public Room(String name) {
 		this.name = name;
-		this.doorStates = new Hashtable<Room, State>();
-	}
-
-	public State getDoorState(Room room) {
-		return doorStates.get(room);
+		this.passages = new ArrayList<Passage>();
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setDoorState(Room room, State state) {
-		if (room != null) {
-			doorStates.put(room, state);
-			room.doorStates.put(this, state);
-		}
+	
+
+	public void setRooms(List<Passage> passages) {
+		this.passages = passages;
 	}
 
-	public void setRooms(Room northRoom, Room southRoom, Room eastRoom,
-			Room westRoom) {
-		this.northRoom = northRoom;
-		initializeRoom(this.northRoom);
-		this.southRoom = southRoom;
-		initializeRoom(this.southRoom);
-		this.eastRoom = eastRoom;
-		initializeRoom(this.eastRoom);
-		this.westRoom = westRoom;
-		initializeRoom(this.westRoom);
-	}
 
-	public void initializeRoom(Room room) {
-		if (room != null) {
-			this.doorStates.put(room, State.OPENED);
-		}
-	}
+	protected Room goToThisRoom(Passage passage) {
+		if (passage != null && passage.canPassThrough()) {
 
-	protected Room goToThisRoom(Room room) {
-		if (room != null && getDoorState(room) == State.OPENED) {
-			if (room instanceof MonsterRoom)
-				((MonsterRoom) room).setLastRoom(this);
 			return room;
 		} else {
 			System.out.println("No way !");
@@ -77,22 +55,15 @@ public class Room {
 	}
 
 	public Room interpretCommand(String command) {
-		switch (command) {
-		case "go north":
-			return goToThisRoom(this.northRoom);
-		case "go west":
-			return goToThisRoom(this.westRoom);
-		case "go south":
-			return goToThisRoom(this.southRoom);
-		case "go east":
-			return goToThisRoom(this.eastRoom);
-		case "help":
-			System.out
-					.println("In a normal room, you can : \n - go north \n - go south \n - go east \n - go west \n - inspect \n - hit button ");
-			return this;
-		default:
-			System.out.println("You can't do that !");
-			return this;
+		if (command.substring(0,2).equals("go")) {
+			int whatRoom = Integer.parseInt(command.substring(2));
+			if(whatRoom<passages.size() && passages.get(whatRoom)!= null && passages.get(whatRoom).canPassThrough()){
+				return passages.get(whatRoom).getNextRoom();
+			}else{
+				return this;
+			}
+		}else if(command.equals("help")){
+			return null;
 		}
 	}
 

@@ -1,5 +1,8 @@
 package game;
 
-public class Game {
+import java.util.List;
 
+public class Game {
+	protected List<Dungeon> dungeons;
+	
 }
