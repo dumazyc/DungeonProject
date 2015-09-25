@@ -1,10 +1,18 @@
-package dungeon;
+package game;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Scanner;
 
-import dungeon.Room.State;
+import characters.Player;
+import rooms.ButtonRoom;
+import rooms.ChestRoom;
+import rooms.ExitRoom;
+import rooms.MonsterRoom;
+import rooms.Room;
+import rooms.TrapRoom;
+import rooms.Room.State;
 
 
 public class Dungeon {
@@ -19,7 +27,7 @@ public class Dungeon {
 	protected List<Room> roomList;
 
 	
-	protected static Player player;
+	public static Player player;
 
 
 	public Dungeon() {

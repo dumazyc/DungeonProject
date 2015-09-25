@@ -3,10 +3,11 @@ package tests;
 import org.junit.Before;
 import org.junit.Test;
 
-import dungeon.Dungeon;
-import dungeon.Monster;
-import dungeon.Player;
-import dungeon.Room;
+import characters.Monster;
+import characters.Player;
+import game.Dungeon;
+import rooms.Room;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

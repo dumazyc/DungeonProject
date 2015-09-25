@@ -1,4 +1,7 @@
-package dungeon;
+package rooms;
+
+import characters.Monster;
+import game.Dungeon;
 
 public class MonsterRoom extends Room {
 	protected Monster monster;
@@ -7,10 +10,6 @@ public class MonsterRoom extends Room {
 	public MonsterRoom(String name) {
 		super(name);
 		monster = new Monster("dragon");
-	}
-
-	public boolean gameIsLost() {
-		return Dungeon.player.isDead();
 	}
 
 	public Monster getMonster() {

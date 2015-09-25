@@ -1,4 +1,4 @@
-package dungeon;
+package rooms;
 
 public class ButtonRoom extends Room {
 	protected Room roomToOpen;

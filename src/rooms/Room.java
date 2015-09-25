@@ -1,9 +1,7 @@
-package dungeon;
+package rooms;
 
 import java.util.Hashtable;
 import java.util.Map;
-
-import dungeon.Room.State;
 
 public class Room {
 	protected Room northRoom;
@@ -13,7 +11,7 @@ public class Room {
 	protected Map<Room, State> doorStates;
 	protected String name;
 
-	protected enum State {
+	public enum State {
 		OPENED, CLOSED, HIDDEN
 	};
 
@@ -97,24 +95,6 @@ public class Room {
 			return this;
 		}
 	}
-
-	/*
-	 * public Room goToNorthRoom() { if ((northRoom != null) &&
-	 * (getDoorState(northRoom).equals(State.OPENED))) { return northRoom; }
-	 * else { System.out.println("No way !"); return this; } }
-	 * 
-	 * public Room goToSouthRoom() { if (southRoom != null &&
-	 * getDoorState(southRoom) == State.OPENED) { return southRoom; } else {
-	 * System.out.println("No way !"); return this; } }
-	 * 
-	 * public Room goToEastRoom() { if (eastRoom != null &&
-	 * getDoorState(eastRoom) == State.OPENED) { return eastRoom; } else {
-	 * System.out.println("No way !"); return this; } }
-	 * 
-	 * public Room goToWestRoom() { if (westRoom != null &&
-	 * getDoorState(westRoom) == State.OPENED) { return westRoom; } else {
-	 * System.out.println("No way !"); return this; } }
-	 */
 
 	public boolean gameIsWon() {
 		return false;

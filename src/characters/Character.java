@@ -1,4 +1,4 @@
-package dungeon;
+package characters;
 
 public abstract class Character {
 	protected String name;

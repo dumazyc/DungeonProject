@@ -1,4 +1,4 @@
-package dungeon;
+package rooms;
 
 public class ExitRoom extends Room {
 
