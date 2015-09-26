@@ -20,8 +20,7 @@ public class Player extends Character {
 			monster.receiveDammage(this.criticalHit);
 			System.out.println("Critical hit !");
 		}
-		monster.receiveDammage(rand
-				.nextInt(maximalDammage - minimalDammage + 1) + minimalDammage);
+		monster.receiveDammage(rand.nextInt(maximalDammage - minimalDammage + 1) + minimalDammage);
 	}
 
 	public void setName(String name) {

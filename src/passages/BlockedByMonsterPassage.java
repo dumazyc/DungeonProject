@@ -2,9 +2,10 @@ package passages;
 
 import rooms.Room;
 
-public class ButtonClosedPassage extends ClosedPassage {
+public class BlockedByMonsterPassage extends ClosedPassage {
 
-	public ButtonClosedPassage(String name, Room nextRoom) {
+	
+	public BlockedByMonsterPassage(String name, Room nextRoom) {
 		super(name, nextRoom);
 	}
 

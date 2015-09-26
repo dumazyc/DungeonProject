@@ -1,14 +1,16 @@
 package passages;
 
-import game.Dungeon;
+import rooms.Room;
 
 public class KeyClosedPassage extends ClosedPassage {
 
-	@Override
-	public void open() {
-		this.isOpen=true;
+	public KeyClosedPassage(String name, Room nextRoom) {
+		super(name, nextRoom);
 	}
 
-
+	@Override
+	public void open() {
+		this.isOpen = true;
+	}
 
 }

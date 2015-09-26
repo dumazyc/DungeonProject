@@ -5,35 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import characters.Player;
-import rooms.ButtonRoom;
-import rooms.ChestRoom;
-import rooms.ExitRoom;
-import rooms.MonsterRoom;
-import rooms.Room;
-import rooms.TrapRoom;
-
+import characters.*;
+import passages.*;
+import rooms.*;
 
 public class Dungeon {
 
-
 	protected Room currentRoom;
-
-
-	protected final Scanner scanner = new Scanner(System.in);
-
-
 	protected List<Room> roomList;
-
-	
-	public static Player player;
-
+	protected Player player;
 
 	public Dungeon() {
-		this.roomList = new ArrayList<Room>();
+		roomList = new ArrayList<Room>();
 		createDungeon();
-		this.currentRoom = this.roomList.get(0);
-		Dungeon.player = new Player();
+		currentRoom = this.roomList.get(0);
+		player = new Player();
 	}
 
 	/**
@@ -47,28 +33,34 @@ public class Dungeon {
 		roomList.add(new ChestRoom("a room"));
 		roomList.add(new ChestRoom("a room"));
 		roomList.add(new MonsterRoom("a monster room"));
-		roomList.add(new ButtonRoom("a room", roomList.get(5),roomList.get(4)));
+		roomList.add(new ButtonRoom("a room", roomList.get(5), roomList.get(4)));
 		roomList.add(new ExitRoom("the exit"));
-
-		roomList.get(0).setRooms(roomList.get(1), null, null, null);
-		roomList.get(1).setRooms(roomList.get(6), roomList.get(0), null,
-				roomList.get(5));
-		roomList.get(2).setRooms(roomList.get(8), roomList.get(7), null,
-				roomList.get(6));
-		roomList.get(3).setRooms(null, roomList.get(4), null, null);
-		roomList.get(4).setRooms(roomList.get(3), roomList.get(5),
-				roomList.get(6), null);
-		roomList.get(5).setRooms(roomList.get(4), null, roomList.get(1), null);
-		roomList.get(6).setRooms(null, roomList.get(1), roomList.get(2),
-				roomList.get(4));
-		roomList.get(7).setRooms(roomList.get(2), null, null, null);
-		roomList.get(8).setRooms(null, roomList.get(2), null, null);
-
-		roomList.get(4).setDoorState(roomList.get(5), State.CLOSED);
-		roomList.get(4).setDoorState(roomList.get(6), State.CLOSED);
-		roomList.get(2).setDoorState(roomList.get(8), State.CLOSED);
-		roomList.get(2).setDoorState(roomList.get(6), State.CLOSED);
-//		roomList.get(2).setDoorState(roomList.get(7), State.HIDDEN);
+		
+		roomList.get(0).addPassage(new Passage("normal passage", roomList.get(1)));
+		
+		roomList.get(1).addPassage(new Passage("normal passage", roomList.get(5)));
+		roomList.get(1).addPassage(new Passage("normal passage", roomList.get(6)));
+		
+		roomList.get(2).addPassage(new PaintingPassage("painting", roomList.get(7)));
+		roomList.get(2).addPassage(new KeyClosedPassage("key closed passage", roomList.get(8)));
+		roomList.get(2).addPassage(new BlockedByMonsterPassage("monster passage", roomList.get(6)));
+		
+		roomList.get(3).addPassage(new Passage("normal passage",roomList.get(4)));
+		
+		roomList.get(4).addPassage(new Passage("normal passage", roomList.get(3)));
+		roomList.get(4).addPassage(new ButtonClosedPassage("button closed passage", roomList.get(5)));
+		roomList.get(4).addPassage(new BlockedByMonsterPassage("monster passage", roomList.get(6)));
+		
+		roomList.get(5).addPassage(new Passage("normal passage", roomList.get(1)));
+		roomList.get(5).addPassage(new ButtonClosedPassage("button closed passage", roomList.get(4)));
+		
+		roomList.get(6).addPassage(new BlockedByMonsterPassage("monster passage", roomList.get(4)));
+		roomList.get(6).addPassage(new BlockedByMonsterPassage("monster passage", roomList.get(2)));
+		roomList.get(6).addPassage(new Passage("normal passage", roomList.get(1)));
+		
+		roomList.get(7).addPassage(new PaintingPassage("painting", roomList.get(2)));
+		
+		roomList.get(8).addPassage(new KeyClosedPassage("key closed passage", roomList.get(2)));		
 	}
 
 	/**
@@ -97,76 +89,21 @@ public class Dungeon {
 	public void interpretCommand(String command) {
 		switch (command) {
 		case "inspect":
-			currentRoom.inspect();
+			System.out.println(currentRoom.inspect());
+			break;
+		case "help":
+			System.out.println(currentRoom.help());
 			break;
 		default:
 			currentRoom = currentRoom.interpretCommand(command);
 		}
 	}
 
-	/**
-	 * Begins the interaction with the player Gives current room's name and asks
-	 * for a command
-	 */
-	public void start() {
-		/*
-		 * System.out.println("What is you name sir ?");
-		 * player.setName(scanner.nextLine()); System.out.println("Welcome, " +
-		 * player.getName());
-		 */
-
-		do {
-			getCurrentRoom().enterTheRoom();
-			if (gameIsFinished()) {
-				break;
-			}
-			System.out.println("What do you want to do?");
-			System.out.print("> ");
-			// Read a command from the user (stdin)
-			interpretCommand(scanner.nextLine().toLowerCase());
-		} while (!gameIsFinished());
-		System.out.println("You are in " + getCurrentRoomName());
-		if (gameIsWon()) {
-			System.out.println("You win!");
-		} else {
-			System.out.println("You loose!");
-		}
-	}
-
-	/**
-	 * Says if the game is finished or not
-	 * 
-	 * @return true if the game is won/lost
-	 */
-	public boolean gameIsFinished() {
-		return gameIsLost() || gameIsWon();
-	}
-
-	/**
-	 * Asks to the current room if the game is lost when the player enters in
-	 * 
-	 * @return {@link Room#gameIsLost()}
-	 */
-	public boolean gameIsLost() {
-		return currentRoom.gameIsLost() || player.isDead();
-	}
-
-	/**
-	 * Asks to the current room if the game is won when the player enters in
-	 * 
-	 * @return {@link Room#gameIsWon()}
-	 */
 	public boolean gameIsWon() {
 		return currentRoom.gameIsWon();
 	}
 
-	/**
-	 * Main method
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Dungeon dungeon = new Dungeon();
-		dungeon.start();
+	public boolean gameIsLost() {
+		return currentRoom.gameIsLost();
 	}
 }

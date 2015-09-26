@@ -8,14 +8,13 @@ public class Monster extends Character {
 		super(name, 2, 1, 5, 20);
 	}
 
+	@Override
 	public void sendDammage(Character player) {
 		Random rand = new Random();
 		// 2% luck to make a critical hit
 		if (rand.nextInt(51) == 50) {
 			player.receiveDammage(this.criticalHit);
 		}
-		player.receiveDammage(rand.nextInt(this.maximalDammage
-				- this.minimalDammage + 1)
-				+ this.minimalDammage);
+		player.receiveDammage(rand.nextInt(this.maximalDammage - this.minimalDammage + 1) + this.minimalDammage);
 	}
 }

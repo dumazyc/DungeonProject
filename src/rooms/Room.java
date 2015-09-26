@@ -1,20 +1,16 @@
 package rooms;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
 
+import characters.Player;
 import passages.Passage;
 
 public class Room {
-//	protected Room northRoom;
-//	protected Room southRoom;
-//	protected Room eastRoom;
-//	protected Room westRoom;
 
 	protected List<Passage> passages;
 	protected String name;
+	protected Player player;
 
 	public void enterTheRoom() {
 		System.out.println("You are in " + name + ".");
@@ -29,42 +25,48 @@ public class Room {
 	public String getName() {
 		return name;
 	}
-
 	
-
-	public void setRooms(List<Passage> passages) {
-		this.passages = passages;
+	public Player getPlayer() {
+		return player;
+	}
+	
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 
+	public void setPassages(List<Passage> passages) {
+		this.passages = passages;
+	}
+	
+	public void addPassage(Passage passage) {
+		this.passages.add(passage);
+	}
 
 	protected Room goToThisRoom(Passage passage) {
 		if (passage != null && passage.canPassThrough()) {
-
-			return room;
+			return passage.getNextRoom();
 		} else {
 			System.out.println("No way !");
 			return this;
 		}
 	}
-	
-	public void openRooms() {
-		setDoorState(this.northRoom, State.OPENED);
-		setDoorState(this.southRoom, State.OPENED);
-		setDoorState(this.eastRoom, State.OPENED);
-		setDoorState(this.westRoom, State.OPENED);
-	}
 
 	public Room interpretCommand(String command) {
-		if (command.substring(0,2).equals("go")) {
-			int whatRoom = Integer.parseInt(command.substring(2));
-			if(whatRoom<passages.size() && passages.get(whatRoom)!= null && passages.get(whatRoom).canPassThrough()){
-				return passages.get(whatRoom).getNextRoom();
-			}else{
+		if (command.length() > 6 && command.substring(0, 5).equals("go to")) {
+			int whatRoom = Integer.parseInt(command.substring(6, 7)) - 1;
+			if (whatRoom < passages.size() && passages.get(whatRoom) != null && passages.get(whatRoom).canPassThrough()) {
+				Room nextRoom = passages.get(whatRoom).getNextRoom();
+				nextRoom.setPlayer(this.getPlayer());
+				setPlayer(null);
+				return nextRoom;
+			} else {
 				return this;
 			}
-		}else if(command.equals("help")){
-			return null;
+		} else {
+			System.out.println("You can't do that (type help to see what are your possibilities)");
 		}
+			
+		return this;
 	}
 
 	public boolean gameIsWon() {
@@ -72,38 +74,29 @@ public class Room {
 	}
 
 	public boolean gameIsLost() {
+		if (player != null)
+			return player.isDead();
 		return false;
 	}
 
-	public void inspect() {
+	public String inspect() {
 		String response = "You see :\n";
-
-		if (northRoom != null) {
-			response += "  - " + inspectDoor(northRoom) + " in front of you.\n";
+		for (int i = 0; i < passages.size(); i++) {
+			response += ((i+1) + " - " + passages.get(i).inspect() + "\n");
 		}
-		if (southRoom != null) {
-			response += "  - " + inspectDoor(southRoom) + " behind you.\n";
-		}
-		if (eastRoom != null) {
-			response += "  - " + inspectDoor(eastRoom) + " on your right.\n";
-		}
-		if (westRoom != null) {
-			response += "  - " + inspectDoor(westRoom) + " on your left.\n";
-		}
-		System.out.println(response);
+		return response;
 	}
 
-	public String inspectDoor(Room room) {
-		if (room != null) {
-			if (this.getDoorState(room) == State.OPENED) {
-				return "An opened door";
-			} else if (this.getDoorState(room) == State.CLOSED) {
-				return "A closed door";
-			} else if (this.getDoorState(room) == State.HIDDEN) {
-				return "A painting";
-			}
+	public String help() {
+		String response = "You can :\n";
+		for (int i = 0; i < passages.size(); i++) {
+			if (passages.get(i).canPassThrough())
+				response += " - go to "+(i+1)+"\n";
 		}
-		return null;
+		return response;
 	}
 
+	public boolean hasCombat() {
+		return false;
+	}
 }

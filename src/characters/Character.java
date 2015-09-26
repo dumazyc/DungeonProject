@@ -10,8 +10,7 @@ public abstract class Character {
 	public Character() {
 	}
 
-	public Character(String name, int healthPoints, int minimalDammage,
-			int maximalDammage, int criticalHit) {
+	public Character(String name, int healthPoints, int minimalDammage, int maximalDammage, int criticalHit) {
 		this.name = name;
 		this.healthPoints = healthPoints;
 		this.minimalDammage = minimalDammage;
@@ -28,8 +27,8 @@ public abstract class Character {
 	}
 
 	public int getHealthPoints() {
-		
-		return this.healthPoints>=0?this.healthPoints:0;
+
+		return this.healthPoints >= 0 ? this.healthPoints : 0;
 	}
 
 	public void sendDammage(Character Character) {

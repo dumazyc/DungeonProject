@@ -8,14 +8,16 @@ public class TrapRoom extends Room {
 		super(name);
 	}
 
+	@Override
 	public boolean gameIsLost() {
-		return Dungeon.player.isDead();
+		return player.isDead();
 	}
 
+	@Override
 	public void enterTheRoom() {
 		System.out.println("You are in " + name + ".");
-		Dungeon.player.receiveDammage(5);
+		player.receiveDammage(5);
 		System.out.println("The trap make you lost 5 HP.");
-		System.out.println("Your HPs: " + Dungeon.player.getHealthPoints());
+		System.out.println("Your HPs: " + player.getHealthPoints());
 	}
 }

@@ -6,6 +6,7 @@ public class ExitRoom extends Room {
 		super(name);
 	}
 
+	@Override
 	public boolean gameIsWon() {
 		return true;
 	}
