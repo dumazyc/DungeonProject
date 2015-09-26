@@ -12,14 +12,14 @@ import rooms.*;
 public class Dungeon {
 
 	protected Room currentRoom;
+	protected Room lastRoom = null;
 	protected List<Room> roomList;
-	protected Player player;
 
 	public Dungeon() {
 		roomList = new ArrayList<Room>();
 		createDungeon();
 		currentRoom = this.roomList.get(0);
-		player = new Player();
+		currentRoom.setPlayer(new Player());
 	}
 
 	/**
@@ -95,6 +95,7 @@ public class Dungeon {
 			System.out.println(currentRoom.help());
 			break;
 		default:
+			lastRoom = currentRoom;
 			currentRoom = currentRoom.interpretCommand(command);
 		}
 	}

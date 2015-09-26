@@ -51,13 +51,17 @@ public class Room {
 		}
 	}
 
+	public void movePlayer(Room room) {
+		room.setPlayer(this.getPlayer());
+		setPlayer(null);
+	}
+	
 	public Room interpretCommand(String command) {
 		if (command.length() > 6 && command.substring(0, 5).equals("go to")) {
 			int whatRoom = Integer.parseInt(command.substring(6, 7)) - 1;
 			if (whatRoom < passages.size() && passages.get(whatRoom) != null && passages.get(whatRoom).canPassThrough()) {
 				Room nextRoom = passages.get(whatRoom).getNextRoom();
-				nextRoom.setPlayer(this.getPlayer());
-				setPlayer(null);
+				movePlayer(nextRoom);
 				return nextRoom;
 			} else {
 				return this;
@@ -92,6 +96,8 @@ public class Room {
 		for (int i = 0; i < passages.size(); i++) {
 			if (passages.get(i).canPassThrough())
 				response += " - go to "+(i+1)+"\n";
+			if (passages.get(i).isHidden())
+				response += " - inspect "+passages.get(i).getName()+"\n";
 		}
 		return response;
 	}

@@ -6,6 +6,7 @@ public class PaintingPassage extends ClosedPassage {
 
 	public PaintingPassage(String name, Room nextRoom) {
 		super(name, nextRoom);
+		this.isHidden = true;
 	}
 
 	@Override

@@ -1,11 +1,10 @@
 package rooms;
 
 import characters.Monster;
-import game.Dungeon;
+import passages.Passage;
 
 public class MonsterRoom extends Room {
 	protected Monster monster;
-	protected Room lastRoom = null;
 
 	public MonsterRoom(String name) {
 		super(name);
@@ -15,11 +14,7 @@ public class MonsterRoom extends Room {
 	public Monster getMonster() {
 		return this.monster;
 	}
-
-	public void setLastRoom(Room room) {
-		this.lastRoom = room;
-	}
-
+	
 	@Override
 	public void enterTheRoom() {
 		System.out.println("You are in " + name + ".");
@@ -47,19 +42,35 @@ public class MonsterRoom extends Room {
 				return this;
 			case "run away":
 				System.out.println("You ran in the last room visited.");
-				return this.lastRoom;
-			case "help":
-				System.out.println("In a monster room, you can : \n - hit monster \n - run away");
-				return this;
-
+				for (Passage passage : passages)
+					if (passage.canPassThrough()) {
+						Room lastRoom = passage.getNextRoom();
+						movePlayer(lastRoom);
+						return lastRoom;
+					}
+					
 			default:
-				// System.out.println("The monster is on your way !\nYou can:
-				// \n\t- hit monster\n\t- run away");
 				System.out.println("You can't do that !");
 				return this;
 			}
 		}
 
 		return super.interpretCommand(command);
+	}
+
+	private void openRooms() {
+		for (Passage passage : passages) {
+			passage.open();
+		}
+	}
+	
+	public String help() {
+		String response = "You can :\n";
+		if (!monster.isDead()) {
+			response += " - hit monster\n - run away\n";
+			return response;			
+		} else {
+			return super.help();
+		}
 	}
 }

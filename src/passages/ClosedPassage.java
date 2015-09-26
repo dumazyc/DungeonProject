@@ -8,7 +8,4 @@ public abstract class ClosedPassage extends Passage {
 		super(name, nextRoom);
 		this.isOpen = false;
 	}
-
-	public abstract void open();
-
 }
