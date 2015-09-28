@@ -4,12 +4,14 @@ import rooms.Room;
 
 public class Passage {
 	protected String name;
+	protected Room previousRoom;
 	protected Room nextRoom;
 	protected boolean isOpen;
 	protected boolean isHidden;
-	
-	public Passage(String name, Room nextRoom) {
+
+	public Passage(String name,Room previousRoom, Room nextRoom) {
 		this.name = name;
+		this.previousRoom = previousRoom;
 		this.nextRoom = nextRoom;
 		this.isOpen = true;
 		this.isHidden = false;
@@ -24,10 +26,13 @@ public class Passage {
 	}
 
 	public String inspect() {
-		return name+" to "+nextRoom.getName();
+		return name + " to " + nextRoom.getName();
 	}
-	
-	public void open() {}
+
+	public void open() {
+		isOpen =true;
+		nextRoom.getPassage(previousRoom).isOpen=true;
+	}
 
 	public boolean isHidden() {
 		return isHidden;

@@ -5,8 +5,8 @@ import rooms.Room;
 public class BlockedByMonsterPassage extends ClosedPassage {
 
 	
-	public BlockedByMonsterPassage(String name, Room nextRoom) {
-		super(name, nextRoom);
+	public BlockedByMonsterPassage(String name, Room nextRoom,Room previousRoom) {
+		super(name, nextRoom, previousRoom);
 	}
 
 	@Override

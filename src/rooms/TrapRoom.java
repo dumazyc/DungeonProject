@@ -1,7 +1,5 @@
 package rooms;
 
-import game.Dungeon;
-
 public class TrapRoom extends Room {
 
 	public TrapRoom(String name) {

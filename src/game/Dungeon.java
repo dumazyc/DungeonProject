@@ -36,31 +36,31 @@ public class Dungeon {
 		roomList.add(new ButtonRoom("a room", roomList.get(5), roomList.get(4)));
 		roomList.add(new ExitRoom("the exit"));
 		
-		roomList.get(0).addPassage(new Passage("normal passage", roomList.get(1)));
+		roomList.get(0).addPassage(new Passage("a north passage", roomList.get(0),roomList.get(1)));
 		
-		roomList.get(1).addPassage(new Passage("normal passage", roomList.get(5)));
-		roomList.get(1).addPassage(new Passage("normal passage", roomList.get(6)));
+		roomList.get(1).addPassage(new Passage("a west passage", roomList.get(1),roomList.get(5)));
+		roomList.get(1).addPassage(new Passage("a north passage", roomList.get(1),roomList.get(6)));
 		
-		roomList.get(2).addPassage(new PaintingPassage("painting", roomList.get(7)));
-		roomList.get(2).addPassage(new KeyClosedPassage("key closed passage", roomList.get(8)));
-		roomList.get(2).addPassage(new BlockedByMonsterPassage("monster passage", roomList.get(6)));
+		roomList.get(2).addPassage(new PaintingPassage("painting", roomList.get(2),roomList.get(7)));
+		roomList.get(2).addPassage(new KeyClosedPassage("a north passage", roomList.get(2),roomList.get(8)));
+		roomList.get(2).addPassage(new BlockedByMonsterPassage("a west passage", roomList.get(2),roomList.get(6)));
 		
-		roomList.get(3).addPassage(new Passage("normal passage",roomList.get(4)));
+		roomList.get(3).addPassage(new Passage("a south passage",roomList.get(3),roomList.get(4)));
 		
-		roomList.get(4).addPassage(new Passage("normal passage", roomList.get(3)));
-		roomList.get(4).addPassage(new ButtonClosedPassage("button closed passage", roomList.get(5)));
-		roomList.get(4).addPassage(new BlockedByMonsterPassage("monster passage", roomList.get(6)));
+		roomList.get(4).addPassage(new Passage("a north passage", roomList.get(4),roomList.get(3)));
+		roomList.get(4).addPassage(new ButtonClosedPassage("a south passage", roomList.get(4),roomList.get(5)));
+		roomList.get(4).addPassage(new BlockedByMonsterPassage("a east passage", roomList.get(4),roomList.get(6)));
 		
-		roomList.get(5).addPassage(new Passage("normal passage", roomList.get(1)));
-		roomList.get(5).addPassage(new ButtonClosedPassage("button closed passage", roomList.get(4)));
+		roomList.get(5).addPassage(new Passage("a east passage", roomList.get(5),roomList.get(1)));
+		roomList.get(5).addPassage(new ButtonClosedPassage("a north passage", roomList.get(5),roomList.get(4)));
 		
-		roomList.get(6).addPassage(new BlockedByMonsterPassage("monster passage", roomList.get(4)));
-		roomList.get(6).addPassage(new BlockedByMonsterPassage("monster passage", roomList.get(2)));
-		roomList.get(6).addPassage(new Passage("normal passage", roomList.get(1)));
+		roomList.get(6).addPassage(new BlockedByMonsterPassage("a west passage", roomList.get(6),roomList.get(4)));
+		roomList.get(6).addPassage(new BlockedByMonsterPassage("a east passage", roomList.get(6),roomList.get(2)));
+		roomList.get(6).addPassage(new Passage("a south passage", roomList.get(6),roomList.get(1)));
 		
-		roomList.get(7).addPassage(new PaintingPassage("painting", roomList.get(2)));
+		roomList.get(7).addPassage(new PaintingPassage("painting", roomList.get(7),roomList.get(2)));
 		
-		roomList.get(8).addPassage(new KeyClosedPassage("key closed passage", roomList.get(2)));		
+		roomList.get(8).addPassage(new KeyClosedPassage("a south passage", roomList.get(8),roomList.get(2)));		
 	}
 
 	/**
@@ -97,6 +97,7 @@ public class Dungeon {
 		default:
 			lastRoom = currentRoom;
 			currentRoom = currentRoom.interpretCommand(command);
+			currentRoom.enterTheRoom();
 		}
 	}
 

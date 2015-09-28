@@ -61,6 +61,7 @@ public class MonsterRoom extends Room {
 	private void openRooms() {
 		for (Passage passage : passages) {
 			passage.open();
+			//TODO Ouvrir les passages inverse
 		}
 	}
 	

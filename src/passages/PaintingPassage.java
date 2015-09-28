@@ -4,8 +4,8 @@ import rooms.Room;
 
 public class PaintingPassage extends ClosedPassage {
 
-	public PaintingPassage(String name, Room nextRoom) {
-		super(name, nextRoom);
+	public PaintingPassage(String name, Room nextRoom, Room previousRoom) {
+		super(name, nextRoom, previousRoom);
 		this.isHidden = true;
 	}
 

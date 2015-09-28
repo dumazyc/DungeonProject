@@ -41,7 +41,17 @@ public class Room {
 	public void addPassage(Passage passage) {
 		this.passages.add(passage);
 	}
-
+	
+	public Passage getPassage(Room room){
+		for (Passage passage : passages) {
+			if(passage.getNextRoom().equals(room)){
+				return passage;
+			}
+		}
+		return null;
+		
+	}
+	
 	protected Room goToThisRoom(Passage passage) {
 		if (passage != null && passage.canPassThrough()) {
 			return passage.getNextRoom();
@@ -64,6 +74,7 @@ public class Room {
 				movePlayer(nextRoom);
 				return nextRoom;
 			} else {
+				System.out.println("You can't do that (type help to see what are your possibilities)");
 				return this;
 			}
 		} else {
