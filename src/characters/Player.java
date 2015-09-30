@@ -2,14 +2,18 @@ package characters;
 
 import java.util.Random;
 
-public class Player extends Character {
+import inventory.Inventory;
 
+public class Player extends Character {
+	protected Inventory inventory;
 	public Player() {
 		super("Player", 30, 2, 6, 1000);
+		inventory = new Inventory();
 	}
 
 	public Player(String name) {
 		super(name, 30, 2, 6, 1000);
+		inventory = new Inventory();
 	}
 
 	public void sendDamage(Monster monster) {
@@ -26,7 +30,9 @@ public class Player extends Character {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	public Inventory getInventory(){
+		return inventory;
+	}
 	public String getName() {
 		return this.name;
 	}
