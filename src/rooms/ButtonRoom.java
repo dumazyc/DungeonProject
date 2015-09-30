@@ -1,19 +1,17 @@
 package rooms;
 
 public class ButtonRoom extends Room {
-	protected Room roomToOpen;
-	protected Room roomToOpen2;
 
-	public ButtonRoom(String name, Room roomToOpen, Room roomToOpen2) {
+	public ButtonRoom(String name) {
 		super(name);
-		this.roomToOpen = roomToOpen;
-		this.roomToOpen2 = roomToOpen2;
 	}
 
 	@Override
 	public Room interpretCommand(String command) {
-		if (command.equals("hit button")) {
-			System.out.println("A closed door is now open");
+		if (command.equals("find a secret button")) {
+			System.out.println("You find a secret button on the wall and hit it.");
+			System.out.println("Far away, a closed door is now open.");
+			openRooms();
 			return this;
 		}
 

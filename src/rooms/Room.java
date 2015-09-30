@@ -98,6 +98,9 @@ public class Room {
 					passage.open();
 				}
 			}
+		}else if (command.equals("find a secret button")) {
+			System.out.println("There is no secret button here.");
+			
 		}else{
 			System.out.println("You can't do that (type help to see what are your possibilities)");
 		}
@@ -131,6 +134,7 @@ public class Room {
 			if (passages.get(i).isHidden())
 				response += " - inspect "+passages.get(i).getName()+"\n";
 		}
+		response += " - find a secret button\n";
 		return response;
 	}
 
