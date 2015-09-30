@@ -58,12 +58,7 @@ public class MonsterRoom extends Room {
 		return super.interpretCommand(command);
 	}
 
-	private void openRooms() {
-		for (Passage passage : passages) {
-			passage.open();
-			//TODO Ouvrir les passages inverse
-		}
-	}
+	
 	
 	public String help() {
 		String response = "You can :\n";

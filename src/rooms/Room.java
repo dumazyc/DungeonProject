@@ -7,7 +7,7 @@ import characters.Player;
 import passages.Passage;
 
 public class Room {
-
+	protected List<Passage> passagesWhichCanBeOpen;
 	protected List<Passage> passages;
 	protected String name;
 	protected Player player;
@@ -20,8 +20,16 @@ public class Room {
 	public Room(String name) {
 		this.name = name;
 		this.passages = new ArrayList<Passage>();
+		this.passagesWhichCanBeOpen = new ArrayList<Passage>();
 	}
-
+	public void addPassagesWhichCanBeOpenByThisRoom(Passage passage){
+		passagesWhichCanBeOpen.add(passage);
+	}
+	protected void openRooms() {
+		for (Passage passage : passagesWhichCanBeOpen) {
+			passage.open();
+		}
+	}
 	public String getName() {
 		return name;
 	}

@@ -31,7 +31,7 @@ public class Passage {
 
 	public void open() {
 		isOpen =true;
-		nextRoom.getPassage(previousRoom).isOpen=true;
+		
 	}
 
 	public boolean isHidden() {

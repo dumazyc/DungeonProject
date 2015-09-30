@@ -64,6 +64,18 @@ public class Dungeon {
 			roomList.get(7).addPassage(new PaintingPassage("painting", roomList.get(7),roomList.get(2)));
 			
 			roomList.get(8).addPassage(new KeyClosedPassage("a south passage", roomList.get(8),roomList.get(2)));	
+			
+			
+			roomList.get(6).addPassagesWhichCanBeOpenByThisRoom(roomList.get(2).getPassage(roomList.get(6)));
+			roomList.get(6).addPassagesWhichCanBeOpenByThisRoom(roomList.get(6).getPassage(roomList.get(2)));
+			roomList.get(6).addPassagesWhichCanBeOpenByThisRoom(roomList.get(4).getPassage(roomList.get(6)));
+			roomList.get(6).addPassagesWhichCanBeOpenByThisRoom(roomList.get(6).getPassage(roomList.get(4)));
+			roomList.get(4).addPassagesWhichCanBeOpenByThisRoom(roomList.get(2).getPassage(roomList.get(8)));
+			roomList.get(4).addPassagesWhichCanBeOpenByThisRoom(roomList.get(8).getPassage(roomList.get(2)));
+			roomList.get(7).addPassagesWhichCanBeOpenByThisRoom(roomList.get(4).getPassage(roomList.get(5)));
+			roomList.get(7).addPassagesWhichCanBeOpenByThisRoom(roomList.get(5).getPassage(roomList.get(4)));
+			roomList.get(2).addPassagesWhichCanBeOpenByThisRoom(roomList.get(2).getPassage(roomList.get(7)));
+			roomList.get(2).addPassagesWhichCanBeOpenByThisRoom(roomList.get(7).getPassage(roomList.get(2)));
 		}
 	}
 
