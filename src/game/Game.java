@@ -13,12 +13,20 @@ public class Game {
 
 	public Game() {
 		dungeons = new ArrayList<Dungeon>();
-		currentDungeon = new Dungeon();
+		currentDungeon = new Dungeon(0);
 		dungeons.add(currentDungeon);
 	}
 
 	public Game(List<Dungeon> dungeons) {
 		this.dungeons = dungeons;
+	}
+	
+	public void setCurrentDungeon(Dungeon dungeon) {
+		currentDungeon = dungeon;
+	}
+	
+	public Dungeon getCurrentDungeon() {
+		return currentDungeon;
 	}
 
 	public void start() {
