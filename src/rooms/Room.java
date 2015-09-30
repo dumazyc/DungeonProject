@@ -92,7 +92,13 @@ public class Room {
 				System.out.println("You can't do that (type help to see what are your possibilities)");
 				return this;
 			}
-		} else {
+		} else if(command.length() > 8 && command.substring(0, 7).equals("inspect")){
+			for (Passage passage : passagesWhichCanBeOpen) {
+				if(passage.getName().equals(command.substring(8))){
+					passage.open();
+				}
+			}
+		}else{
 			System.out.println("You can't do that (type help to see what are your possibilities)");
 		}
 			
