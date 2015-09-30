@@ -76,7 +76,14 @@ public class Room {
 	
 	public Room interpretCommand(String command) {
 		if (command.length() > 6 && command.substring(0, 5).equals("go to")) {
-			int whatRoom = Integer.parseInt(command.substring(6, 7)) - 1;
+			int whatRoom = -1;
+			try {
+				whatRoom = Integer.parseInt(command.substring(6, 7)) - 1;
+			} catch (NumberFormatException e) {
+				System.out.println("You can't do that (type help to see what are your possibilities)");
+				return this;
+			}
+			
 			if (whatRoom < passages.size() && passages.get(whatRoom) != null && passages.get(whatRoom).canPassThrough()) {
 				Room nextRoom = passages.get(whatRoom).getNextRoom();
 				movePlayer(nextRoom);
