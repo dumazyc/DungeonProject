@@ -120,7 +120,9 @@ public class Room {
 
 			if (whatItem < player.getInventory().getItemList().size()) {
 				boolean used = player.getInventory().getItemList().get(whatItem).use(this);
+				if(used){
 				player.getInventory().removeItemFromInventory(player.getInventory().getItemList().get(whatItem));
+				}
 				return this;
 			} else {
 				System.out.println("You can't do that (type help to see what are your possibilities)");
