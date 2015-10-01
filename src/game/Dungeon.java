@@ -21,23 +21,27 @@ public class Dungeon {
 		currentRoom = this.roomList.get(0);
 		currentRoom.setPlayer(new Player());
 	}
+	
+	public Dungeon() {
+		roomList = new ArrayList<Room>();
+	}
+	
+	public List<Room> getRoomList() {
+		return this.roomList;
+	}
+	
+	public void setCurrentRoom(Room room) {
+		currentRoom = room;
+	}
 
 	private void createDungeon(int choice) {
 		switch (choice) {
-		case 1:
-			roomList.add(new Room("the entrance"));
-			roomList.add(new TrapRoom("a trap"));
-			
-			roomList.get(0).addPassage(new Passage("a north passage", roomList.get(0), roomList.get(1)));
-			roomList.get(1).addPassage(new Passage("a south passage", roomList.get(1), roomList.get(0)));
-			break;
-		case 2:
-			roomList.add(new Room("the entrance"));
-			roomList.add(new ExitRoom("the exit"));
-			
-			roomList.get(0).addPassage(new Passage("a north passage", roomList.get(0), roomList.get(1)));
-			roomList.get(1).addPassage(new Passage("a south passage", roomList.get(1), roomList.get(0)));
-			break;
+//		case 1:
+//			
+//			break;
+//		case 2:
+//			
+//			break;
 		default:
 			roomList.add(new Room("the entrance"));
 			roomList.add(new Room("a room"));
