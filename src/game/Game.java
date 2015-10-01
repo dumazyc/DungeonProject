@@ -66,6 +66,7 @@ public class Game {
 		List<Dungeon> dungeons = new ArrayList<Dungeon>();
 		dungeons.add(new Dungeon(1));
 		dungeons.add(new Dungeon(2));
+		dungeons.add(new Dungeon(3));
 		Game game = new Game(dungeons);
 		game.start();
 	}
