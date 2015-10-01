@@ -26,7 +26,10 @@ public class Game {
 	public Dungeon getCurrentDungeon() {
 		return currentDungeon;
 	}
-
+	
+	/**
+	 * Start the game and interacts with the player for each dungeon
+	 */
 	public void start() {
 		for (int i = 0; i < dungeons.size(); i++) {
 			currentDungeon = dungeons.get(i);

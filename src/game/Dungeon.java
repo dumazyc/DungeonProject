@@ -35,11 +35,17 @@ public class Dungeon {
 		currentRoom = room;
 	}
 
+	/**
+	 * Creates the chosen dungeon among 3 (yet) choices
+	 * @param choice
+	 */
 	private void createDungeon(int choice) {
 		Key key = new Key("key");
 		
 		switch (choice) {
 		case 1:
+			
+			// First step: create the rooms
 			roomList.add(new Room("a room"));
 			roomList.add(new Room("a room"));
 			roomList.add(new TrapRoom("a trap"));
@@ -50,6 +56,7 @@ public class Dungeon {
 			roomList.add(new ExitRoom("the exit"));
 			
 			
+			// Second step: add passage(s) to each room
 			roomList.get(0).addPassage(new Passage("a north passage", roomList.get(0),roomList.get(1)));
 			
 			roomList.get(1).addPassage(new Passage("a west passage", roomList.get(1),roomList.get(5)));
@@ -76,7 +83,7 @@ public class Dungeon {
 			
 			roomList.get(8).addPassage(new Passage("a south passage", roomList.get(8),roomList.get(2)));	
 			
-			
+			// Third step: define which passage(s) can be opened in a room
 			roomList.get(6).addPassagesWhichCanBeOpenByThisRoom(roomList.get(2).getPassage(roomList.get(6)));
 			roomList.get(6).addPassagesWhichCanBeOpenByThisRoom(roomList.get(6).getPassage(roomList.get(2)));
 			roomList.get(6).addPassagesWhichCanBeOpenByThisRoom(roomList.get(4).getPassage(roomList.get(6)));
@@ -86,8 +93,11 @@ public class Dungeon {
 			roomList.get(2).addPassagesWhichCanBeOpenByThisRoom(roomList.get(2).getPassage(roomList.get(7)));
 			roomList.get(2).addPassagesWhichCanBeOpenByThisRoom(roomList.get(7).getPassage(roomList.get(2)));
 			
+			// Forth step: define which passage can be opened with a key
 			key.addPassageWhichCanBeOpenWithThisKey(roomList.get(2).getPassage(roomList.get(8)));
 			key.addPassageWhichCanBeOpenWithThisKey(roomList.get(8).getPassage(roomList.get(2)));
+			
+			// Fifth step: add treasures in each chest
 			((ChestRoom) roomList.get(4)).addTreasure(key);
 			((ChestRoom) roomList.get(5)).addTreasure(new Potion("Red Potion",5));
 			break;

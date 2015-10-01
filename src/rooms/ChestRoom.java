@@ -19,7 +19,7 @@ public class ChestRoom extends Room {
 		if (command.equals("open the chest")) {
 			if (this.itemInTheChest != null) {
 				System.out.println("You open the chest and find a " + itemInTheChest.getName());
-				player.getInventory().addItemTonventory(itemInTheChest);
+				player.getInventory().addItemToInventory(itemInTheChest);
 				itemInTheChest = null;
 			}else{
 				System.out.println("You open the chest but it is empty");

@@ -14,7 +14,7 @@ public class MonsterRoom extends Room {
 	public Monster getMonster() {
 		return this.monster;
 	}
-	
+
 	@Override
 	public void enterTheRoom() {
 		System.out.println("You are in " + name + ".");
@@ -25,6 +25,11 @@ public class MonsterRoom extends Room {
 
 	@Override
 	public Room interpretCommand(String command) {
+		/*
+		 * iff the monster isn't dead, only "hit monster" and "run away"
+		 * commands are available.
+		 * else, usual commands are available.
+		 */
 		if (!this.monster.isDead()) {
 			switch (command) {
 			case "hit monster":
@@ -48,7 +53,7 @@ public class MonsterRoom extends Room {
 						movePlayer(lastRoom);
 						return lastRoom;
 					}
-					
+
 			default:
 				System.out.println("You can't do that !");
 				return this;
@@ -58,13 +63,11 @@ public class MonsterRoom extends Room {
 		return super.interpretCommand(command);
 	}
 
-	
-	
 	public String help() {
 		String response = "You can :\n";
 		if (!monster.isDead()) {
 			response += " - hit monster\n - run away\n";
-			return response;			
+			return response;
 		} else {
 			return super.help();
 		}
