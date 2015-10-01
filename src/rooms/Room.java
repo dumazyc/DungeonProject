@@ -1,11 +1,9 @@
 package rooms;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import characters.Player;
-import inventory.Item;
 import passages.Passage;
 
 public class Room {

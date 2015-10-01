@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import rooms.Room;
-
 public class Game {
 	protected List<Dungeon> dungeons;
 	protected Dungeon currentDungeon;
@@ -20,64 +18,56 @@ public class Game {
 	public Game(List<Dungeon> dungeons) {
 		this.dungeons = dungeons;
 	}
-	
+
 	public void setCurrentDungeon(Dungeon dungeon) {
 		currentDungeon = dungeon;
 	}
-	
+
 	public Dungeon getCurrentDungeon() {
 		return currentDungeon;
 	}
 
 	public void start() {
-		for (Dungeon dungeon : dungeons) {
+		for (int i = 0; i < dungeons.size(); i++) {
+			currentDungeon = dungeons.get(i);
+			System.out.println("Welcome to the dungeon n°" + (i + 1));
 			do {
 				System.out.println("What do you want to do?");
 				System.out.print("> ");
-				dungeon.interpretCommand(scanner.nextLine().toLowerCase());
+				currentDungeon.interpretCommand(scanner.nextLine().toLowerCase());
 
 			} while (!gameIsFinished());
+			if (gameIsWon()) {
+				System.out.println("You win the dungeon n°" + (i + 1) + " !");
+				if (i == dungeons.size()-1) {
+					System.out.println("Congratulation, you've completed all the dungeons !");
+				}
+			} else {
+				System.out.println("You loose!");
+				break;
+			}
 		}
-		if (gameIsWon()) {
-			System.out.println("You win!");
-		} else {
-			System.out.println("You loose!");
-		}
+
 	}
 
-	/**
-	 * Says if the game is finished or not
-	 * 
-	 * @return true if the game is won/lost
-	 */
 	public boolean gameIsFinished() {
 		return gameIsLost() || gameIsWon();
 	}
 
-	/**
-	 * Asks to the current room if the game is lost when the player enters in
-	 * 
-	 * @return {@link Room#gameIsLost()}
-	 */
 	public boolean gameIsLost() {
 		return currentDungeon.gameIsLost();
 	}
 
-	/**
-	 * Asks to the current room if the game is won when the player enters in
-	 * 
-	 * @return {@link Room#gameIsWon()}
-	 */
 	public boolean gameIsWon() {
 		return currentDungeon.gameIsWon();
 	}
-	
-	public void startCombat() {
-		
-	}
 
 	public static void main(String[] args) {
-		Game game = new Game();
+		List<Dungeon> dungeons = new ArrayList<Dungeon>();
+		dungeons.add(new Dungeon(2));
+		dungeons.add(new Dungeon(2));
+		dungeons.add(new Dungeon(2));
+		Game game = new Game(dungeons);
 		game.start();
 	}
 }

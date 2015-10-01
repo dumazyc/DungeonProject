@@ -23,13 +23,22 @@ public class Dungeon {
 	}
 
 	private void createDungeon(int choice) {
-		if (choice == 1) {
+		switch (choice) {
+		case 1:
 			roomList.add(new Room("the entrance"));
 			roomList.add(new TrapRoom("a trap"));
 			
 			roomList.get(0).addPassage(new Passage("a north passage", roomList.get(0), roomList.get(1)));
 			roomList.get(1).addPassage(new Passage("a south passage", roomList.get(1), roomList.get(0)));
-		} else {
+			break;
+		case 2:
+			roomList.add(new Room("the entrance"));
+			roomList.add(new ExitRoom("the exit"));
+			
+			roomList.get(0).addPassage(new Passage("a north passage", roomList.get(0), roomList.get(1)));
+			roomList.get(1).addPassage(new Passage("a south passage", roomList.get(1), roomList.get(0)));
+			break;
+		default:
 			roomList.add(new Room("the entrance"));
 			roomList.add(new Room("a room"));
 			roomList.add(new Room("a room"));
