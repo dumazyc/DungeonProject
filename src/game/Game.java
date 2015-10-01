@@ -30,7 +30,7 @@ public class Game {
 	public void start() {
 		for (int i = 0; i < dungeons.size(); i++) {
 			currentDungeon = dungeons.get(i);
-			System.out.println("Welcome to the dungeon n°" + (i + 1));
+			System.out.println("Welcome to the dungeon number " + (i + 1));
 			do {
 				System.out.println("What do you want to do?");
 				System.out.print("> ");
@@ -64,8 +64,7 @@ public class Game {
 
 	public static void main(String[] args) {
 		List<Dungeon> dungeons = new ArrayList<Dungeon>();
-		dungeons.add(new Dungeon(2));
-		dungeons.add(new Dungeon(2));
+		dungeons.add(new Dungeon(1));
 		dungeons.add(new Dungeon(2));
 		Game game = new Game(dungeons);
 		game.start();
