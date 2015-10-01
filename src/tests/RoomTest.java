@@ -10,8 +10,10 @@ import characters.Player;
 import game.Dungeon;
 import game.Game;
 import inventory.Potion;
+import passages.ClosedPassage;
 import passages.PaintingPassage;
 import passages.Passage;
+import rooms.ButtonRoom;
 import rooms.ChestRoom;
 import rooms.ExitRoom;
 import rooms.MonsterRoom;
@@ -58,10 +60,12 @@ public class RoomTest {
 			break;
 		case 5:
 
-			roomList.add(new TrapRoom("a trap"));
-
+			roomList.add(new ButtonRoom("a room"));
+			roomList.add(new ExitRoom("the exit"));
 			roomList.get(0).addPassage(new Passage("a north passage", roomList.get(0), roomList.get(1)));
 			roomList.get(1).addPassage(new Passage("a south passage", roomList.get(1), roomList.get(0)));
+			roomList.get(1).addPassage(new ClosedPassage("a north passage", roomList.get(1), roomList.get(2)));
+			roomList.get(1).addPassagesWhichCanBeOpenByThisRoom(roomList.get(1).getPassage(roomList.get(2)));
 			break;
 		case 6:
 
@@ -104,7 +108,20 @@ public class RoomTest {
 	public void goThroughAMonsterRoom() {
 		createParticularDungeon(6);
 		game.getCurrentDungeon().interpretCommand("go to 1");
+		for(int i =0;i<30;i++){
 		game.getCurrentDungeon().interpretCommand("hit monster");
+		}
+		game.getCurrentDungeon().interpretCommand("go to 2");
+		assertTrue(game.getCurrentDungeon().gameIsWon());
+		assertFalse(game.getCurrentDungeon().gameIsLost());
+		
+	}
+	
+	@Test
+	public void goThroughAButtonRoom() {
+		createParticularDungeon(5);
+		game.getCurrentDungeon().interpretCommand("go to 1");
+		game.getCurrentDungeon().interpretCommand("find a secret button");
 		game.getCurrentDungeon().interpretCommand("go to 2");
 		assertTrue(game.getCurrentDungeon().gameIsWon());
 		assertFalse(game.getCurrentDungeon().gameIsLost());
@@ -120,5 +137,21 @@ public class RoomTest {
 		assertTrue(room.equals(game.getCurrentDungeon().getCurrentRoom()));
 		
 	}
-
+	@Test
+	public void testFirstFloor() {
+		game = new Game();
+		game.setCurrentDungeon(new Dungeon(1));
+		
+		game.getCurrentDungeon().interpretCommand("go to 1");
+		game.getCurrentDungeon().interpretCommand("go to 2");
+		game.getCurrentDungeon().interpretCommand("hit monster");
+		game.getCurrentDungeon().interpretCommand("go to 1");
+		game.getCurrentDungeon().interpretCommand("open the chest");
+		game.getCurrentDungeon().interpretCommand("go to 3");
+		game.getCurrentDungeon().interpretCommand("go to 2");
+		game.getCurrentDungeon().interpretCommand("use item 1");
+		game.getCurrentDungeon().interpretCommand("go to 2");
+		assertTrue(game.getCurrentDungeon().gameIsWon());
+		
+	}
 }
