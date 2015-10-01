@@ -3,7 +3,13 @@ package inventory;
 import rooms.Room;
 
 public abstract class Item {
-	String name;
-
+	protected String name;
+	public Item(String name){
+		this.name = name;
+	}
 	public abstract void use(Room currentRoom);
+
+	public String getName() {
+		return name;
+	}
 }

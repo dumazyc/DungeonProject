@@ -21,10 +21,10 @@ public class Player extends Character {
 		Random rand = new Random();
 		// 2% luck to make a critical hit
 		if (rand.nextInt(21) == 20) {
-			monster.receiveDammage(this.criticalHit);
+			monster.receiveDamage(this.criticalHit);
 			System.out.println("Critical hit !");
 		}
-		monster.receiveDammage(rand.nextInt(maximalDammage - minimalDammage + 1) + minimalDammage);
+		monster.receiveDamage(rand.nextInt(maximalDammage - minimalDammage + 1) + minimalDammage);
 	}
 
 	public void setName(String name) {
@@ -35,5 +35,9 @@ public class Player extends Character {
 	}
 	public String getName() {
 		return this.name;
+	}
+
+	public void heal(int hPRestoreNumber) {
+this.healthPoints+=hPRestoreNumber;		
 	}
 }

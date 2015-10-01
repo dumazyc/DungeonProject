@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import characters.Player;
+import inventory.Key;
+import inventory.Potion;
 import passages.*;
 import rooms.*;
 
@@ -61,21 +63,24 @@ public class Dungeon {
 			roomList.get(6).addPassage(new ClosedPassage("a east passage", roomList.get(6),roomList.get(2)));
 			roomList.get(6).addPassage(new Passage("a south passage", roomList.get(6),roomList.get(1)));
 			
-			roomList.get(7).addPassage(new PaintingPassage("painting", roomList.get(7),roomList.get(2)));
+			roomList.get(7).addPassage(new Passage("a north passage", roomList.get(7),roomList.get(2)));
 			
-			roomList.get(8).addPassage(new ClosedPassage("a south passage", roomList.get(8),roomList.get(2)));	
+			roomList.get(8).addPassage(new Passage("a south passage", roomList.get(8),roomList.get(2)));	
 			
 			
 			roomList.get(6).addPassagesWhichCanBeOpenByThisRoom(roomList.get(2).getPassage(roomList.get(6)));
 			roomList.get(6).addPassagesWhichCanBeOpenByThisRoom(roomList.get(6).getPassage(roomList.get(2)));
 			roomList.get(6).addPassagesWhichCanBeOpenByThisRoom(roomList.get(4).getPassage(roomList.get(6)));
 			roomList.get(6).addPassagesWhichCanBeOpenByThisRoom(roomList.get(6).getPassage(roomList.get(4)));
-			roomList.get(4).addPassagesWhichCanBeOpenByThisRoom(roomList.get(2).getPassage(roomList.get(8)));
-			roomList.get(4).addPassagesWhichCanBeOpenByThisRoom(roomList.get(8).getPassage(roomList.get(2)));
 			roomList.get(7).addPassagesWhichCanBeOpenByThisRoom(roomList.get(4).getPassage(roomList.get(5)));
 			roomList.get(7).addPassagesWhichCanBeOpenByThisRoom(roomList.get(5).getPassage(roomList.get(4)));
 			roomList.get(2).addPassagesWhichCanBeOpenByThisRoom(roomList.get(2).getPassage(roomList.get(7)));
 			roomList.get(2).addPassagesWhichCanBeOpenByThisRoom(roomList.get(7).getPassage(roomList.get(2)));
+			Key key = new Key("key");
+			key.addPassageWhichCanBeOpenWithThisKey(roomList.get(2).getPassage(roomList.get(8)));
+			key.addPassageWhichCanBeOpenWithThisKey(roomList.get(8).getPassage(roomList.get(2)));
+			((ChestRoom) roomList.get(4)).addTreasure(key);
+			((ChestRoom) roomList.get(5)).addTreasure(new Potion("Red Potion",5));
 		}
 	}
 

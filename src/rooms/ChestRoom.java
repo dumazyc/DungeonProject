@@ -1,19 +1,22 @@
 package rooms;
 
+import inventory.Item;
+
 public class ChestRoom extends Room {
-	
+	Item itemInTheChest;
 	public ChestRoom(String name) {
 		super(name);
-		// TODO Auto-generated constructor stub
+		
 	}
-	public void addTreasure(Object objectToAdd){
-		//TODO à réfléchir
+	public void addTreasure(Item itemInTheChest){
+		this.itemInTheChest = itemInTheChest;
 	}
 	@Override
 	public Room interpretCommand(String command) {
 		if (command.equals("open the chest")) {
-			System.out.println("You find a secret button on the wall and hit it.");
-			System.out.println("Far away, a closed door is now open.");
+			
+			System.out.println("You open the chest and find a "+itemInTheChest.getName());
+			player.getInventory().addItemTonventory(itemInTheChest);
 			openRooms();
 			return this;
 		}

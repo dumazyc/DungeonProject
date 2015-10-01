@@ -22,7 +22,7 @@ public abstract class Character {
 		return healthPoints <= 0;
 	}
 
-	public void receiveDammage(int dammage) {
+	public void receiveDamage(int dammage) {
 		this.healthPoints -= dammage;
 	}
 

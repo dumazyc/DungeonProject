@@ -13,8 +13,8 @@ public class Monster extends Character {
 		Random rand = new Random();
 		// 2% luck to make a critical hit
 		if (rand.nextInt(51) == 50) {
-			player.receiveDammage(this.criticalHit);
+			player.receiveDamage(this.criticalHit);
 		}
-		player.receiveDammage(rand.nextInt(this.maximalDammage - this.minimalDammage + 1) + this.minimalDammage);
+		player.receiveDamage(rand.nextInt(this.maximalDammage - this.minimalDammage + 1) + this.minimalDammage);
 	}
 }

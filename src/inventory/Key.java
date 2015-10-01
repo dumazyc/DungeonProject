@@ -7,11 +7,11 @@ import passages.Passage;
 import rooms.Room;
 
 public class Key extends Item {
-	protected String name;
 	protected List<Passage> passageWhichCanBeOpenWithThisKey;
 
 	public Key(String name) {
-		this.name = name;
+		super(name);
+		
 		this.passageWhichCanBeOpenWithThisKey = new ArrayList<Passage>();
 	}
 
@@ -30,7 +30,20 @@ public class Key extends Item {
 
 	@Override
 	public void use(Room room) {
-		
+		boolean doorCanBeOpen =false;
+		for (Passage passage : passageWhichCanBeOpenWithThisKey) {
+			if(passage.getNextRoom().equals(room)){
+				 doorCanBeOpen = true;
+			}
+		}
+		if (doorCanBeOpen) {
+			for (Passage passage : passageWhichCanBeOpenWithThisKey) {
+				System.out.println("You have unlocked a door with this key !");
+				passage.open();
+			}
+		}else{
+			System.out.println("The key is useless in this room.");
+		}
 
 	}
 

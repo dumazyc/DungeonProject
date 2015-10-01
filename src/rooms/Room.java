@@ -1,9 +1,11 @@
 package rooms;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import characters.Player;
+import inventory.Item;
 import passages.Passage;
 
 public class Room {
@@ -101,6 +103,29 @@ public class Room {
 		}else if (command.equals("find a secret button")) {
 			System.out.println("There is no secret button here.");
 			
+		}else if(command.equals("see inventory")){
+			System.out.println("Your inventory contains :");
+			for (int i = 0; i <  player.getInventory().getItemList().size(); i++) {
+				System.out.println("- "+(i+1)+". "+player.getInventory().getItemList().get(i).getName());
+			}
+			
+		}else if(command.length() > 9 && command.substring(0, 8).equals("use item")){
+			int whatItem = -1;
+			try {
+				whatItem = Integer.parseInt(command.substring(9, 10)) - 1;
+			} catch (NumberFormatException e) {
+				System.out.println("You can't do that (type help to see what are your possibilities)");
+				return this;
+			}
+			
+			if (whatItem < player.getInventory().getItemList().size()) {
+				player.getInventory().getItemList().get(whatItem).use(this);
+				
+				return this;
+			} else {
+				System.out.println("You can't do that (type help to see what are your possibilities)");
+				return this;
+			}
 		}else{
 			System.out.println("You can't do that (type help to see what are your possibilities)");
 		}

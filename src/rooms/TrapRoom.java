@@ -14,7 +14,7 @@ public class TrapRoom extends Room {
 	@Override
 	public void enterTheRoom() {
 		System.out.println("You are in " + name + ".");
-		player.receiveDammage(5);
+		player.receiveDamage(5);
 		System.out.println("The trap make you lost 5 HP.");
 		System.out.println("Your HPs: " + player.getHealthPoints());
 	}
