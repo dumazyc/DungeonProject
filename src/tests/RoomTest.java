@@ -39,7 +39,7 @@ public class RoomTest {
 		case 2:
 			roomList.add(new ExitRoom("the exit"));
 
-			roomList.get(0).addPassage(new PaintingPassage("painting", roomList.get(0),roomList.get(1)));
+			roomList.get(0).addPassage(new Passage("a north passage", roomList.get(0),roomList.get(1)));
 			roomList.get(1).addPassage(new Passage("a south passage", roomList.get(1), roomList.get(0)));
 			break;
 		case 3:
@@ -50,11 +50,17 @@ public class RoomTest {
 			((ChestRoom) roomList.get(1)).addTreasure(new Potion("Red Potion",5));
 			break;
 		case 4:
-			roomList.add(new ChestRoom("a room"));
+			roomList.add(new Room("a room"));
+
+			roomList.get(0).addPassage(new PaintingPassage("painting", roomList.get(0),roomList.get(1)));
+			roomList.get(1).addPassage(new Passage("a south passage", roomList.get(1), roomList.get(0)));
+			break;
+		case 5:
+			
+			roomList.add(new TrapRoom("a trap"));
 
 			roomList.get(0).addPassage(new Passage("a north passage", roomList.get(0), roomList.get(1)));
 			roomList.get(1).addPassage(new Passage("a south passage", roomList.get(1), roomList.get(0)));
-			((ChestRoom) roomList.get(1)).addTreasure(new Potion("Red Potion",5));
 			break;
 		}
 		
@@ -102,16 +108,17 @@ public class RoomTest {
 	public void openAHiddenDoor() {
 		
 		createParticularDungeon(4);
+		Room currentRoom=game.getCurrentDungeon().getCurrentRoom();
 		game.getCurrentDungeon().getCurrentRoom().interpretCommand("inspect painting");
-		
-		assertFalse(game.getCurrentDungeon().getCurrentRoom().interpretCommand("go to 1").equals(game.getCurrentDungeon().getCurrentRoom()));
+		game.getCurrentDungeon().getCurrentRoom().interpretCommand("go to 1");
+		assertFalse(currentRoom.equals(game.getCurrentDungeon().getCurrentRoom()));
 			
 		
 	}
 	@Test
 	public void secretButton() {
 		
-		createParticularDungeon(4);
+		createParticularDungeon(5);
 		game.getCurrentDungeon().getCurrentRoom().interpretCommand("find a secret button");
 		
 		assertFalse(game.getCurrentDungeon().getCurrentRoom().interpretCommand("go to 1").equals(game.getCurrentDungeon().getCurrentRoom()));
