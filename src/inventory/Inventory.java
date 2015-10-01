@@ -4,28 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Inventory {
-	protected List<Key> keysList;
-	protected List<Potion> potionsList;
-	protected Weapon weapon;
-	
+	protected List<Item> itemList;
+
 	public Inventory() {
-		keysList = new ArrayList<Key>();
-		potionsList = new ArrayList<Potion>();
+		itemList = new ArrayList<Item>();
 	}
-	
-	public void addKey(Key key){
-		keysList.add(key);
+
+	public void addItemTonventory(Item item) {
+		itemList.add(item);
 	}
-	public void addPotion(Potion potion){
-		potionsList.add(potion);
-	}
-	public void addWeapon(Weapon weapon){
-		//TODO
-	}
-	public List<Key> getKey(){
-		return keysList;
-	}
-	public List<Potion> getPotion(){
-		return potionsList;
+
+	public List<Item> getItemList() {
+		return itemList;
 	}
 }
