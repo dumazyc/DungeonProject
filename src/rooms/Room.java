@@ -63,14 +63,7 @@ public class Room {
 
 	}
 
-	protected Room goToThisRoom(Passage passage) {
-		if (passage != null && passage.canPassThrough()) {
-			return passage.getNextRoom();
-		} else {
-			System.out.println("No way !");
-			return this;
-		}
-	}
+
 
 	public void movePlayer(Room room) {
 		room.setPlayer(this.getPlayer());
