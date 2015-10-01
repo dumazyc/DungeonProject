@@ -14,6 +14,7 @@ import passages.PaintingPassage;
 import passages.Passage;
 import rooms.ChestRoom;
 import rooms.ExitRoom;
+import rooms.MonsterRoom;
 import rooms.Room;
 import rooms.TrapRoom;
 
@@ -39,7 +40,7 @@ public class RoomTest {
 		case 2:
 			roomList.add(new ExitRoom("the exit"));
 
-			roomList.get(0).addPassage(new Passage("a north passage", roomList.get(0),roomList.get(1)));
+			roomList.get(0).addPassage(new Passage("a north passage", roomList.get(0), roomList.get(1)));
 			roomList.get(1).addPassage(new Passage("a south passage", roomList.get(1), roomList.get(0)));
 			break;
 		case 3:
@@ -47,23 +48,31 @@ public class RoomTest {
 
 			roomList.get(0).addPassage(new Passage("a north passage", roomList.get(0), roomList.get(1)));
 			roomList.get(1).addPassage(new Passage("a south passage", roomList.get(1), roomList.get(0)));
-			((ChestRoom) roomList.get(1)).addTreasure(new Potion("Red Potion",5));
+			((ChestRoom) roomList.get(1)).addTreasure(new Potion("Red Potion", 5));
 			break;
 		case 4:
 			roomList.add(new Room("a room"));
 
-			roomList.get(0).addPassage(new PaintingPassage("painting", roomList.get(0),roomList.get(1)));
+			roomList.get(0).addPassage(new PaintingPassage("painting", roomList.get(0), roomList.get(1)));
 			roomList.get(1).addPassage(new Passage("a south passage", roomList.get(1), roomList.get(0)));
 			break;
 		case 5:
-			
+
 			roomList.add(new TrapRoom("a trap"));
 
 			roomList.get(0).addPassage(new Passage("a north passage", roomList.get(0), roomList.get(1)));
 			roomList.get(1).addPassage(new Passage("a south passage", roomList.get(1), roomList.get(0)));
 			break;
+		case 6:
+
+			roomList.add(new MonsterRoom("a monster room"));
+			roomList.add(new ExitRoom("the exit"));
+			roomList.get(0).addPassage(new Passage("a north passage", roomList.get(0), roomList.get(1)));
+			roomList.get(1).addPassage(new Passage("a south passage", roomList.get(1), roomList.get(0)));
+			roomList.get(1).addPassage(new Passage("a north passage", roomList.get(1), roomList.get(2)));
+			break;
 		}
-		
+
 	}
 
 	@Test
@@ -89,40 +98,27 @@ public class RoomTest {
 				.equals(game.getCurrentDungeon().getCurrentRoom()));
 
 	}
+
+	
 	@Test
-	public void inventoryNotEmptyAfterOpenAChest() {
-		System.out.println("Test 4 : \n");
-		createParticularDungeon(3);
-		game.getCurrentDungeon().getCurrentRoom().interpretCommand("inspect");
-		game.getCurrentDungeon().getCurrentRoom().interpretCommand("go to 1");
-		
-		game.getCurrentDungeon().getCurrentRoom().interpretCommand("open the chest");
-		System.out.println(game.getCurrentDungeon().getCurrentRoom().getPlayer());
-		System.out.println(game.getCurrentDungeon().getCurrentRoom().getPlayer().getInventory());
-		game.getCurrentDungeon().getCurrentRoom().getPlayer().getInventory().getItemList();
-		assertFalse(game.getCurrentDungeon().getCurrentRoom().getPlayer().getInventory().getItemList().isEmpty());
-			
-		System.out.println("\n Fin Test 4 ");
-	}
-	@Test
-	public void openAHiddenDoor() {
-		
-		createParticularDungeon(4);
-		Room currentRoom=game.getCurrentDungeon().getCurrentRoom();
-		game.getCurrentDungeon().getCurrentRoom().interpretCommand("inspect painting");
-		game.getCurrentDungeon().getCurrentRoom().interpretCommand("go to 1");
-		assertFalse(currentRoom.equals(game.getCurrentDungeon().getCurrentRoom()));
-			
+	public void goThroughAMonsterRoom() {
+		createParticularDungeon(6);
+		game.getCurrentDungeon().interpretCommand("go to 1");
+		game.getCurrentDungeon().interpretCommand("hit monster");
+		game.getCurrentDungeon().interpretCommand("go to 2");
+		assertTrue(game.getCurrentDungeon().gameIsWon());
+		assertFalse(game.getCurrentDungeon().gameIsLost());
 		
 	}
 	@Test
-	public void secretButton() {
+	public void runAwayFromMonster() {
+		createParticularDungeon(6);
+		Room room = game.getCurrentDungeon().getCurrentRoom();
+		game.getCurrentDungeon().interpretCommand("go to 1");
 		
-		createParticularDungeon(5);
-		game.getCurrentDungeon().getCurrentRoom().interpretCommand("find a secret button");
-		
-		assertFalse(game.getCurrentDungeon().getCurrentRoom().interpretCommand("go to 1").equals(game.getCurrentDungeon().getCurrentRoom()));
-			
+		game.getCurrentDungeon().interpretCommand("run away");
+		assertTrue(room.equals(game.getCurrentDungeon().getCurrentRoom()));
 		
 	}
+
 }

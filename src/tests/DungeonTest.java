@@ -41,13 +41,15 @@ public class DungeonTest {
 
 	@Test
 	public void initialRoomIsEntrance() {
-		createParticularDungeon(1);
+		game = new Game();
+		game.setCurrentDungeon(new Dungeon(1));
 		assertEquals("the entrance", game.getCurrentDungeon().getCurrentRoom().getName());
 	}
 
 	@Test
 	public void gameNotFinishedAtBeginning() {
-		createParticularDungeon(1);
+		game = new Game();
+		game.setCurrentDungeon(new Dungeon(2));
 		assertFalse(game.gameIsFinished());
 	}
 
@@ -62,7 +64,8 @@ public class DungeonTest {
 
 	@Test
 	public void nothingHappensWhenGoingInNonExistingDirection() {
-		createParticularDungeon(1);
+		game = new Game();
+		game.setCurrentDungeon(new Dungeon(3));
 		Room firstRoom = game.getCurrentDungeon().getCurrentRoom();
 
 		// The player begins in the entrance which have only one passage, go to
@@ -77,4 +80,5 @@ public class DungeonTest {
 		game.getCurrentDungeon().interpretCommand("go to 1");
 		assertTrue(game.gameIsWon());
 	}
+	
 }
