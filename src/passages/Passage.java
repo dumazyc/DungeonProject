@@ -26,7 +26,7 @@ public class Passage {
 	}
 
 	public String inspect() {
-		return name + " to " + nextRoom.getName();
+		return name ;
 	}
 
 	public void open() {

@@ -24,22 +24,25 @@ public class Room {
 		this.passages = new ArrayList<Passage>();
 		this.passagesWhichCanBeOpen = new ArrayList<Passage>();
 	}
-	public void addPassagesWhichCanBeOpenByThisRoom(Passage passage){
+
+	public void addPassagesWhichCanBeOpenByThisRoom(Passage passage) {
 		passagesWhichCanBeOpen.add(passage);
 	}
+
 	protected void openRooms() {
 		for (Passage passage : passagesWhichCanBeOpen) {
 			passage.open();
 		}
 	}
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public Player getPlayer() {
 		return player;
 	}
-	
+
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
@@ -47,21 +50,21 @@ public class Room {
 	public void setPassages(List<Passage> passages) {
 		this.passages = passages;
 	}
-	
+
 	public void addPassage(Passage passage) {
 		this.passages.add(passage);
 	}
-	
-	public Passage getPassage(Room room){
+
+	public Passage getPassage(Room room) {
 		for (Passage passage : passages) {
-			if(passage.getNextRoom().equals(room)){
+			if (passage.getNextRoom().equals(room)) {
 				return passage;
 			}
 		}
 		return null;
-		
+
 	}
-	
+
 	protected Room goToThisRoom(Passage passage) {
 		if (passage != null && passage.canPassThrough()) {
 			return passage.getNextRoom();
@@ -75,7 +78,7 @@ public class Room {
 		room.setPlayer(this.getPlayer());
 		setPlayer(null);
 	}
-	
+
 	public Room interpretCommand(String command) {
 		if (command.length() > 6 && command.substring(0, 5).equals("go to")) {
 			int whatRoom = -1;
@@ -85,8 +88,9 @@ public class Room {
 				System.out.println("You can't do that (type help to see what are your possibilities)");
 				return this;
 			}
-			
-			if (whatRoom < passages.size() && passages.get(whatRoom) != null && passages.get(whatRoom).canPassThrough()) {
+
+			if (whatRoom < passages.size() && passages.get(whatRoom) != null
+					&& passages.get(whatRoom).canPassThrough()) {
 				Room nextRoom = passages.get(whatRoom).getNextRoom();
 				movePlayer(nextRoom);
 				return nextRoom;
@@ -94,22 +98,27 @@ public class Room {
 				System.out.println("You can't do that (type help to see what are your possibilities)");
 				return this;
 			}
-		} else if(command.length() > 8 && command.substring(0, 7).equals("inspect")){
+		} else if (command.length() > 8 && command.substring(0, 7).equals("inspect")) {
 			for (Passage passage : passagesWhichCanBeOpen) {
-				if(passage.getName().equals(command.substring(8))){
+				if (passage.getName().equals(command.substring(8))) {
 					passage.open();
 				}
 			}
-		}else if (command.equals("find a secret button")) {
+		} else if (command.equals("find a secret button")) {
 			System.out.println("There is no secret button here.");
-			
-		}else if(command.equals("see inventory")){
-			System.out.println("Your inventory contains :");
-			for (int i = 0; i <  player.getInventory().getItemList().size(); i++) {
-				System.out.println("- "+(i+1)+". "+player.getInventory().getItemList().get(i).getName());
+
+		} else if (command.equals("see inventory")) {
+
+			if (player.getInventory().getItemList().isEmpty()) {
+				System.out.println("Your inventory is empty.");
+			} else {
+				System.out.println("Your inventory contains :");
+				for (int i = 0; i < player.getInventory().getItemList().size(); i++) {
+					System.out.println("- " + (i + 1) + ". " + player.getInventory().getItemList().get(i).getName());
+				}
 			}
-			
-		}else if(command.length() > 9 && command.substring(0, 8).equals("use item")){
+
+		} else if (command.length() > 9 && command.substring(0, 8).equals("use item")) {
 			int whatItem = -1;
 			try {
 				whatItem = Integer.parseInt(command.substring(9, 10)) - 1;
@@ -117,19 +126,19 @@ public class Room {
 				System.out.println("You can't do that (type help to see what are your possibilities)");
 				return this;
 			}
-			
+
 			if (whatItem < player.getInventory().getItemList().size()) {
 				player.getInventory().getItemList().get(whatItem).use(this);
-				
+				player.getInventory().removeItemFromInventory(player.getInventory().getItemList().get(whatItem));
 				return this;
 			} else {
 				System.out.println("You can't do that (type help to see what are your possibilities)");
 				return this;
 			}
-		}else{
+		} else {
 			System.out.println("You can't do that (type help to see what are your possibilities)");
 		}
-			
+
 		return this;
 	}
 
@@ -146,7 +155,7 @@ public class Room {
 	public String inspect() {
 		String response = "You see :\n";
 		for (int i = 0; i < passages.size(); i++) {
-			response += ((i+1) + " - " + passages.get(i).inspect() + "\n");
+			response += ((i + 1) + " - " + passages.get(i).inspect() + "\n");
 		}
 		return response;
 	}
@@ -155,11 +164,16 @@ public class Room {
 		String response = "You can :\n";
 		for (int i = 0; i < passages.size(); i++) {
 			if (passages.get(i).canPassThrough())
-				response += " - go to "+(i+1)+"\n";
+				response += " - go to " + (i + 1) + "\n";
 			if (passages.get(i).isHidden())
-				response += " - inspect "+passages.get(i).getName()+"\n";
+				response += " - inspect " + passages.get(i).getName() + "\n";
+		}
+		response += " - see inventory\n";
+		for (int i = 0; i < player.getInventory().getItemList().size(); i++) {
+			response += " - use item " + (i + 1) + "\n";
 		}
 		response += " - find a secret button\n";
+
 		return response;
 	}
 
