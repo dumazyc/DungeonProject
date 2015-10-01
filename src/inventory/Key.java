@@ -29,7 +29,7 @@ public class Key extends Item {
 	}
 
 	@Override
-	public void use(Room room) {
+	public boolean use(Room room) {
 		boolean doorCanBeOpen =false;
 		for (Passage passage : passageWhichCanBeOpenWithThisKey) {
 			if(passage.getNextRoom().equals(room)){
@@ -41,8 +41,10 @@ public class Key extends Item {
 				System.out.println("You have unlocked a door with this key !");
 				passage.open();
 			}
+			return true;
 		}else{
 			System.out.println("The key is useless in this room.");
+			return false;
 		}
 
 	}

@@ -7,7 +7,7 @@ public abstract class Item {
 	public Item(String name){
 		this.name = name;
 	}
-	public abstract void use(Room currentRoom);
+	public abstract boolean use(Room currentRoom);
 
 	public String getName() {
 		return name;

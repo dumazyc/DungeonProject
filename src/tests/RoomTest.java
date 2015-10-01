@@ -108,4 +108,14 @@ public class RoomTest {
 			
 		
 	}
+	@Test
+	public void secretButton() {
+		
+		createParticularDungeon(4);
+		game.getCurrentDungeon().getCurrentRoom().interpretCommand("find a secret button");
+		
+		assertFalse(game.getCurrentDungeon().getCurrentRoom().interpretCommand("go to 1").equals(game.getCurrentDungeon().getCurrentRoom()));
+			
+		
+	}
 }

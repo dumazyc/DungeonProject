@@ -12,8 +12,9 @@ public class Potion extends Item {
 	}
 
 	@Override
-	public void use(Room room) {
+	public boolean use(Room room) {
 		System.out.println("You have won "+hPRestoreNumber+" HPs !");
 		room.getPlayer().heal(hPRestoreNumber);
+		return true;
 	}
 }

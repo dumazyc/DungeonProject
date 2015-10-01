@@ -119,7 +119,7 @@ public class Room {
 			}
 
 			if (whatItem < player.getInventory().getItemList().size()) {
-				player.getInventory().getItemList().get(whatItem).use(this);
+				boolean used = player.getInventory().getItemList().get(whatItem).use(this);
 				player.getInventory().removeItemFromInventory(player.getInventory().getItemList().get(whatItem));
 				return this;
 			} else {
