@@ -80,5 +80,5 @@ public class DungeonTest {
 		game.getCurrentDungeon().interpretCommand("go to 1");
 		assertTrue(game.gameIsWon());
 	}
-	
+
 }

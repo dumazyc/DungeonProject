@@ -80,7 +80,7 @@ public class RoomTest {
 	}
 
 	@Test
-	public void inspectionIsNotEmpty() {
+	public void commandInspectIsNotEmpty() {
 		createParticularDungeon(1);
 		assertFalse(game.getCurrentDungeon().getCurrentRoom().inspect().equals(""));
 		game.getCurrentDungeon().getCurrentRoom().interpretCommand("go to 1");
@@ -88,14 +88,14 @@ public class RoomTest {
 	}
 
 	@Test
-	public void helpIsNotEmpty() {
+	public void commandHelpIsNotEmpty() {
 
 		createParticularDungeon(1);
 		assertFalse(game.getCurrentDungeon().getCurrentRoom().help().equals(""));
 	}
 
 	@Test
-	public void cantTypeGoToPlusString() {
+	public void cantWriteCommandGoToPlusAString() {
 
 		createParticularDungeon(1);
 		assertTrue(game.getCurrentDungeon().getCurrentRoom().interpretCommand("go to random_string")
@@ -103,20 +103,19 @@ public class RoomTest {
 
 	}
 
-	
 	@Test
 	public void goThroughAMonsterRoom() {
 		createParticularDungeon(6);
 		game.getCurrentDungeon().interpretCommand("go to 1");
-		for(int i =0;i<30;i++){
-		game.getCurrentDungeon().interpretCommand("hit monster");
+		for (int i = 0; i < 30; i++) {
+			game.getCurrentDungeon().interpretCommand("hit monster");
 		}
 		game.getCurrentDungeon().interpretCommand("go to 2");
 		assertTrue(game.getCurrentDungeon().gameIsWon());
 		assertFalse(game.getCurrentDungeon().gameIsLost());
-		
+
 	}
-	
+
 	@Test
 	public void goThroughAButtonRoom() {
 		createParticularDungeon(5);
@@ -125,26 +124,30 @@ public class RoomTest {
 		game.getCurrentDungeon().interpretCommand("go to 2");
 		assertTrue(game.getCurrentDungeon().gameIsWon());
 		assertFalse(game.getCurrentDungeon().gameIsLost());
-		
+
 	}
+
 	@Test
 	public void runAwayFromMonster() {
 		createParticularDungeon(6);
 		Room room = game.getCurrentDungeon().getCurrentRoom();
 		game.getCurrentDungeon().interpretCommand("go to 1");
-		
+
 		game.getCurrentDungeon().interpretCommand("run away");
 		assertTrue(room.equals(game.getCurrentDungeon().getCurrentRoom()));
-		
+
 	}
+
 	@Test
 	public void testFirstFloor() {
 		game = new Game();
 		game.setCurrentDungeon(new Dungeon(1));
-		
+
 		game.getCurrentDungeon().interpretCommand("go to 1");
 		game.getCurrentDungeon().interpretCommand("go to 2");
-		game.getCurrentDungeon().interpretCommand("hit monster");
+		for (int i = 0; i < 30; i++) {
+			game.getCurrentDungeon().interpretCommand("hit monster");
+		}
 		game.getCurrentDungeon().interpretCommand("go to 1");
 		game.getCurrentDungeon().interpretCommand("open the chest");
 		game.getCurrentDungeon().interpretCommand("go to 3");
@@ -152,6 +155,6 @@ public class RoomTest {
 		game.getCurrentDungeon().interpretCommand("use item 1");
 		game.getCurrentDungeon().interpretCommand("go to 2");
 		assertTrue(game.getCurrentDungeon().gameIsWon());
-		
+
 	}
 }

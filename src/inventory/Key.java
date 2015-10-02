@@ -11,7 +11,7 @@ public class Key extends Item {
 
 	public Key(String name) {
 		super(name);
-		
+
 		this.passageWhichCanBeOpenWithThisKey = new ArrayList<Passage>();
 	}
 
@@ -30,10 +30,10 @@ public class Key extends Item {
 
 	@Override
 	public boolean use(Room room) {
-		boolean doorCanBeOpen =false;
+		boolean doorCanBeOpen = false;
 		for (Passage passage : passageWhichCanBeOpenWithThisKey) {
-			if(passage.getNextRoom().equals(room)){
-				 doorCanBeOpen = true;
+			if (passage.getNextRoom().equals(room)) {
+				doorCanBeOpen = true;
 			}
 		}
 		if (doorCanBeOpen) {
@@ -42,7 +42,7 @@ public class Key extends Item {
 				passage.open();
 			}
 			return true;
-		}else{
+		} else {
 			System.out.println("The key is useless in this room.");
 			return false;
 		}

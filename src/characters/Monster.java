@@ -5,7 +5,7 @@ import java.util.Random;
 public class Monster extends Character {
 
 	public Monster(String name) {
-		super(name, 2, 1, 5, 20);
+		super(name, 10, 1, 5, 20);
 	}
 
 	@Override

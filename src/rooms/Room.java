@@ -63,8 +63,6 @@ public class Room {
 
 	}
 
-
-
 	public void movePlayer(Room room) {
 		room.setPlayer(this.getPlayer());
 		setPlayer(null);
@@ -74,7 +72,7 @@ public class Room {
 		// the main command "go to "+(an integer) is treated here
 		if (command.length() > 6 && command.substring(0, 5).equals("go to")) {
 			int whatRoom = -1;
-			
+
 			// the argument of the command "go to" HAVE to be an integer
 			try {
 				whatRoom = Integer.parseInt(command.substring(6, 7)) - 1;
@@ -82,8 +80,9 @@ public class Room {
 				System.out.println("You can't do that (type help to see what are your possibilities)");
 				return this;
 			}
-			
-			// iff the passage number is in the choices and the passage is open, we move the player to the next room
+
+			// iff the passage number is in the choices and the passage is open,
+			// we move the player to the next room
 			if (whatRoom < passages.size() && passages.get(whatRoom) != null
 					&& passages.get(whatRoom).canPassThrough()) {
 				Room nextRoom = passages.get(whatRoom).getNextRoom();
@@ -112,7 +111,7 @@ public class Room {
 					System.out.println("- " + (i + 1) + ". " + player.getInventory().getItemList().get(i).getName());
 				}
 			}
-		
+			// the main command "use item "+(an integer) is treated here
 		} else if (command.length() > 9 && command.substring(0, 8).equals("use item")) {
 			int whatItem = -1;
 			try {
@@ -124,8 +123,8 @@ public class Room {
 
 			if (whatItem < player.getInventory().getItemList().size()) {
 				boolean used = player.getInventory().getItemList().get(whatItem).use(this);
-				if(used){
-				player.getInventory().removeItemFromInventory(player.getInventory().getItemList().get(whatItem));
+				if (used) {
+					player.getInventory().removeItemFromInventory(player.getInventory().getItemList().get(whatItem));
 				}
 				return this;
 			} else {

@@ -9,7 +9,7 @@ public class Passage {
 	protected boolean isOpen;
 	protected boolean isHidden;
 
-	public Passage(String name,Room previousRoom, Room nextRoom) {
+	public Passage(String name, Room previousRoom, Room nextRoom) {
 		this.name = name;
 		this.previousRoom = previousRoom;
 		this.nextRoom = nextRoom;
@@ -26,12 +26,12 @@ public class Passage {
 	}
 
 	public String inspect() {
-		return name ;
+		return name;
 	}
 
 	public void open() {
-		isOpen =true;
-		
+		isOpen = true;
+
 	}
 
 	public boolean isHidden() {

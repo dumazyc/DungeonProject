@@ -27,8 +27,7 @@ public class MonsterRoom extends Room {
 	public Room interpretCommand(String command) {
 		/*
 		 * iff the monster isn't dead, only "hit monster" and "run away"
-		 * commands are available.
-		 * else, usual commands are available.
+		 * commands are available. else, usual commands are available.
 		 */
 		if (!this.monster.isDead()) {
 			switch (command) {

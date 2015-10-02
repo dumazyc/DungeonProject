@@ -13,7 +13,7 @@ public class PaintingPassage extends ClosedPassage {
 	public void open() {
 		System.out.println("Behind the painting, there is a door !");
 		this.isOpen = true;
-		this.isHidden=false;
+		this.isHidden = false;
 	}
 
 }

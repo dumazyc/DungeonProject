@@ -26,7 +26,7 @@ public class Game {
 	public Dungeon getCurrentDungeon() {
 		return currentDungeon;
 	}
-	
+
 	/**
 	 * Start the game and interacts with the player for each dungeon
 	 */
@@ -41,8 +41,8 @@ public class Game {
 
 			} while (!gameIsFinished());
 			if (gameIsWon()) {
-				System.out.println("You win the dungeon n°" + (i + 1) + " !");
-				if (i == dungeons.size()-1) {
+				System.out.println("You win the dungeon number" + (i + 1) + " !");
+				if (i == dungeons.size() - 1) {
 					System.out.println("Congratulation, you've completed all the dungeons !");
 				}
 			} else {
