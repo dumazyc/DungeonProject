@@ -158,6 +158,7 @@ public class Room {
 
 	public String help() {
 		String response = "You can :\n";
+		response += " - inspect\n";
 		for (int i = 0; i < passages.size(); i++) {
 			if (passages.get(i).canPassThrough())
 				response += " - go to " + (i + 1) + "\n";
